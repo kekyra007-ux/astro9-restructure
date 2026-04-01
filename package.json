@@ -1,0 +1,28 @@
+{
+  "name": "astro-site-template",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "favicon": "node scripts/favicon.mjs",
+    "sitemap": "node scripts/sitemap.mjs",
+    "archive": "node scripts/archive.mjs",
+    "prepare": "echo 'Run: npm run favicon && npm run build'"
+  },
+  "dependencies": {
+    "astro": "^4.15.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5",
+    "archiver": "^7.0.1",
+    "dotenv": "^16.4.5",
+    "@napi-rs/canvas": "^0.1.53"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

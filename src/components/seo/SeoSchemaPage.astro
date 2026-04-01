@@ -1,0 +1,28 @@
+---
+/**
+ * src/components/seo/SeoSchemaPage.astro
+ * Generic JSON-LD schema for any non-home page.
+ * The page loads its own locale and passes title + description here.
+ */
+import SeoSchema from './SeoSchema.astro';
+
+type PageSlug = 'about' | 'features' | 'products' | 'pricing' | 'contact';
+
+interface Props {
+  lang:        string;
+  slug:        PageSlug;
+  title:       string;
+  description: string;
+}
+
+const { lang, slug, title, description } = Astro.props;
+const pageUrl = `${import.meta.env.PUBLIC_DOMAIN}/${lang}/${slug}`;
+---
+
+<SeoSchema
+  slug={slug}
+  pageName={title}
+  pageDescription={description}
+  pageUrl={pageUrl}
+  imagePath="/img/og.jpg"
+/>

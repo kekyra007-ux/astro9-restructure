@@ -1,0 +1,58 @@
+{
+  "home": {
+    "canonical": "{DOMAIN}/",
+    "hreflang": [
+      { "lang": "en",        "href": "{DOMAIN}/en/" },
+      { "lang": "tl",        "href": "{DOMAIN}/tl/" },
+      { "lang": "x-default", "href": "{DOMAIN}/" }
+    ]
+  },
+  "about": {
+    "canonical": "{DOMAIN}/en/about/",
+    "hreflang": [
+      { "lang": "en",        "href": "{DOMAIN}/en/about/" },
+      { "lang": "tl",        "href": "{DOMAIN}/tl/about/" },
+      { "lang": "x-default", "href": "{DOMAIN}/en/about/" }
+    ]
+  },
+  "features": {
+    "canonical": "{DOMAIN}/en/features/",
+    "hreflang": [
+      { "lang": "en",        "href": "{DOMAIN}/en/features/" },
+      { "lang": "tl",        "href": "{DOMAIN}/tl/features/" },
+      { "lang": "x-default", "href": "{DOMAIN}/en/features/" }
+    ]
+  },
+  "products": {
+    "canonical": "{DOMAIN}/en/products/",
+    "hreflang": [
+      { "lang": "en",        "href": "{DOMAIN}/en/products/" },
+      { "lang": "tl",        "href": "{DOMAIN}/tl/products/" },
+      { "lang": "x-default", "href": "{DOMAIN}/en/products/" }
+    ]
+  },
+  "pricing": {
+    "canonical": "{DOMAIN}/en/pricing/",
+    "hreflang": [
+      { "lang": "en",        "href": "{DOMAIN}/en/pricing/" },
+      { "lang": "tl",        "href": "{DOMAIN}/tl/pricing/" },
+      { "lang": "x-default", "href": "{DOMAIN}/en/pricing/" }
+    ]
+  },
+  "contact": {
+    "canonical": "{DOMAIN}/en/contact/",
+    "hreflang": [
+      { "lang": "en",        "href": "{DOMAIN}/en/contact/" },
+      { "lang": "tl",        "href": "{DOMAIN}/tl/contact/" },
+      { "lang": "x-default", "href": "{DOMAIN}/en/contact/" }
+    ]
+  },
+  "privacy": {
+    "canonical": "{DOMAIN}/privacy",
+    "hreflang": false
+  },
+  "terms": {
+    "canonical": "{DOMAIN}/terms",
+    "hreflang": false
+  }
+}

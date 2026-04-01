@@ -1,0 +1,331 @@
+---
+/**
+ * src/layouts/BaseLayout.astro
+ * Root layout for all pages. Injects SEO meta, canonical, hreflang,
+ * favicon links, and global styles.
+ */
+import { ENV } from "../utils/env";
+import { getCanon } from "../utils/canon";
+import "../styles/global.css";
+import ContactButton from "../components/ContactButton.astro";
+
+interface Props {
+  /** Page title — will be suffixed with brand name */
+  title: string;
+  /** Meta description */
+  description?: string;
+  /** Page slug for canon.json lookup, e.g. "home", "casino" */
+  slug?: string;
+  /** Language code for <html lang> */
+  lang?: string;
+  /** Optional OG image URL */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "",
+  slug = "home",
+  lang = "en",
+  ogImage,
+} = Astro.props;
+
+const { canonical, hreflang } = getCanon(slug);
+const fullTitle = slug === "home"
+  ? `${ENV.BRAND}`
+  : `${title} — ${ENV.BRAND}`;
+
+const ogImg = ogImage ?? `${ENV.DOMAIN}/img/og.jpg`;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>{fullTitle}</title>
+  {description && <meta name="description" content={description} />}
+
+  <!-- Canonical -->
+  <link rel="canonical" href={canonical} />
+
+  <!-- Hreflang alternates -->
+  {hreflang && hreflang.map((h) => (
+    <link rel="alternate" hreflang={h.lang} href={h.href} />
+  ))}
+
+  <!-- OG / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={fullTitle} />
+  {description && <meta property="og:description" content={description} />}
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImg} />
+  <meta property="og:site_name" content={ENV.BRAND} />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  {description && <meta name="twitter:description" content={description} />}
+  <meta name="twitter:image" content={ogImg} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+  <!-- Preconnect hints for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Google Fonts: Inter -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+  />
+
+  <slot name="head" />
+</head>
+<body>
+  <slot />
+  <ContactButton />
+</body>
+</html>
+
+<style is:global>
+  /* ── Design tokens — light SaaS palette ── */
+  :root {
+    --color-bg:           #FFFFFF;
+    --color-surface:      #FFFFFF;
+    --color-surface-alt:  #F8FAFC;
+    --color-border:       #E2E8F0;
+    --color-border-strong:#CBD5E1;
+    --color-primary:      #6366F1;
+    --color-primary-hover:#4F46E5;
+    --color-accent:       #7C3AED;
+    --color-text:         #0F172A;
+    --color-text-secondary:#475569;
+    --color-muted:        #94A3B8;
+    --color-link:         #6366F1;
+    --color-indigo-bg:    #EEF2FF;
+
+    --font-display: 'Inter', 'OpenSans', system-ui, sans-serif;
+    --font-body:    'Inter', 'OpenSans', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+
+    --radius-sm:  6px;
+    --radius-md:  8px;
+    --radius-lg:  12px;
+    --radius-xl:  16px;
+
+    --transition: 0.18s ease;
+
+    --shadow-sm:     0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md:     0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+    --shadow-lg:     0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+    --shadow-indigo: 0 4px 20px rgba(99,102,241,0.22);
+
+    --container-max:  1280px;
+    --container-pad:  clamp(1rem, 4vw, 1.5rem);
+  }
+
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.65;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #main-content { flex: 1; }
+
+  img, video, svg { display: block; max-width: 100%; }
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+  a:hover { color: var(--color-primary-hover); }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.2;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+
+  p { color: var(--color-text-secondary); }
+
+  /* ── Layout ── */
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition);
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: #FFFFFF;
+    box-shadow: var(--shadow-indigo);
+  }
+  .btn-primary:hover {
+    background: var(--color-primary-hover);
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(99,102,241,0.32);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-border-strong);
+  }
+  .btn-outline:hover {
+    background: var(--color-indigo-bg);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: var(--color-surface-alt);
+    color: var(--color-text-secondary);
+    border: 1.5px solid var(--color-border);
+  }
+  .btn-ghost:hover {
+    background: var(--color-border);
+    color: var(--color-text);
+  }
+
+  /* ── Section spacing ── */
+  .section    { padding-block: clamp(3.5rem, 8vw, 6rem); }
+  .section-sm { padding-block: clamp(2rem, 5vw, 3.5rem); }
+
+  /* ── Card ── */
+  .card {
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    box-shadow: var(--shadow-sm);
+  }
+  .card:hover {
+    border-color: #C7D2FE;
+    box-shadow: 0 8px 24px rgba(99,102,241,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* ── Badge ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .badge-gold {
+    background: var(--color-indigo-bg);
+    color: var(--color-primary);
+    border: 1px solid #C7D2FE;
+  }
+  .badge-accent {
+    background: #F3E8FF;
+    color: #7C3AED;
+    border: 1px solid #DDD6FE;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: var(--color-border);
+    margin-block: 2rem;
+  }
+
+  /* ── Grid helpers ── */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; }
+
+  /* ── Typography helpers ── */
+  .text-center   { text-align: center; }
+  .text-muted    { color: var(--color-muted); }
+  .text-primary  { color: var(--color-primary); }
+  .text-accent   { color: var(--color-accent); }
+
+  .heading-xl {
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .heading-lg {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+  .heading-md {
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-weight: 600;
+  }
+
+  /* ── Scroll bar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #F8FAFC; }
+  ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
+  /* ── Focus visible ── */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.04); }
+  }
+
+  .animate-fade-up { animation: fadeUp 0.55s ease both; }
+  .animate-fade-in { animation: fadeIn 0.35s ease both; }
+</style>

@@ -1,0 +1,347 @@
+---
+interface Props {
+  heading: string;
+  description: string;
+  bullets: string[];
+  trustCard: {
+    paragraphs: string[];
+    cta: string;
+  };
+  ctaHref: string;
+}
+
+const { heading, description, bullets, trustCard, ctaHref } = Astro.props;
+---
+
+<section class="home-welcome">
+  <div class="home-welcome__inner">
+    <div class="home-welcome__left">
+      <span class="home-welcome__eyebrow">Why clients choose us</span>
+
+      <div class="home-welcome__heading-block">
+        <h2 class="home-welcome__heading">{heading}</h2>
+        <p class="home-welcome__desc">{description}</p>
+      </div>
+
+      <ul class="home-welcome__bullets">
+        {bullets.map((b) => (
+          <li class="home-welcome__bullet">
+            <span class="home-welcome__bullet-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none">
+                <path d="M4.5 10.5L8 14L15.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="home-welcome__bullet-text">{b}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <aside class="home-welcome__card">
+      <div class="home-welcome__card-top">
+        <span class="home-welcome__card-badge">Trusted expertise</span>
+      </div>
+
+      <div class="home-welcome__card-body">
+        {trustCard.paragraphs.map((p, index) => (
+          <p class={`home-welcome__card-para ${index === 0 ? 'home-welcome__card-para--lead' : ''}`}>
+            {p}
+          </p>
+        ))}
+      </div>
+
+      <div class="home-welcome__card-footer">
+        <a href={ctaHref} class="home-welcome__cta">
+          <span>{trustCard.cta}</span>
+          <svg class="home-welcome__cta-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M5 10H15M15 10L10.75 5.75M15 10L10.75 14.25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .home-welcome {
+    background: var(--color-bg);
+    padding: 5.5rem 0;
+  }
+
+  .home-welcome__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    gap: 2.25rem;
+    align-items: start;
+  }
+
+  .home-welcome__left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    min-width: 0;
+  }
+
+  .home-welcome__eyebrow {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    padding: 0.42rem 0.82rem;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    color: #4f46e5;
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .home-welcome__heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 720px;
+  }
+
+  .home-welcome__heading {
+    margin: 0;
+    font-family: var(--font-display);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 1.3rem + 1.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+    text-transform: none;
+    text-wrap: balance;
+    color: var(--color-title);
+  }
+
+  .home-welcome__desc {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: color-mix(in srgb, var(--color-text) 88%, white);
+    text-wrap: pretty;
+    max-width: 62ch;
+  }
+
+  .home-welcome__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    max-width: 760px;
+  }
+
+  .home-welcome__bullet {
+    display: grid;
+    grid-template-columns: 1.4rem 1fr;
+    gap: 0.85rem;
+    align-items: start;
+    padding: 0.85rem 0;
+    border-top: 1px solid rgba(15, 23, 42, 0.07);
+  }
+
+  .home-welcome__bullet:first-child {
+    border-top: 1px solid rgba(15, 23, 42, 0.07);
+  }
+
+  .home-welcome__bullet-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-top: 0.08rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(99, 102, 241, 0.08);
+    color: #4f46e5;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.08) inset;
+    flex-shrink: 0;
+  }
+
+  .home-welcome__bullet-icon svg {
+    width: 0.86rem;
+    height: 0.86rem;
+  }
+
+  .home-welcome__bullet-text {
+    font-size: 0.96rem;
+    line-height: 1.62;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .home-welcome__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.75rem;
+    border-radius: 28px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(248,250,255,0.88) 100%);
+    border: 1px solid color-mix(in srgb, var(--color-border) 78%, white);
+    box-shadow:
+      0 18px 40px rgba(15, 23, 42, 0.06),
+      0 1px 0 rgba(255,255,255,0.82) inset;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+  }
+
+  .home-welcome__card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366F1 0%, #818CF8 50%, #A5B4FC 100%);
+  }
+
+  .home-welcome__card-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .home-welcome__card-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    padding: 0.42rem 0.82rem;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    color: #4f46e5;
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .home-welcome__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
+  }
+
+  .home-welcome__card-para {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.72;
+    color: color-mix(in srgb, var(--color-text) 88%, white);
+  }
+
+  .home-welcome__card-para--lead {
+    font-size: 1rem;
+    line-height: 1.72;
+    color: var(--color-title);
+    font-weight: 600;
+  }
+
+  .home-welcome__card-footer {
+    margin-top: 0.35rem;
+    padding-top: 1.15rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .home-welcome__cta {
+    min-height: 3.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.25rem;
+    border-radius: 16px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+    background: linear-gradient(180deg, #5B61F6 0%, #4F46E5 100%);
+    box-shadow:
+      0 12px 24px rgba(79, 70, 229, 0.18),
+      0 1px 0 rgba(255,255,255,0.2) inset;
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition),
+      filter var(--transition);
+  }
+
+  .home-welcome__cta:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow:
+      0 16px 28px rgba(79, 70, 229, 0.22),
+      0 1px 0 rgba(255,255,255,0.24) inset;
+  }
+
+  .home-welcome__cta-icon {
+    width: 0.95rem;
+    height: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 980px) {
+    .home-welcome__inner {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .home-welcome__heading-block,
+    .home-welcome__bullets {
+      max-width: 100%;
+    }
+
+    .home-welcome__card {
+      max-width: 760px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .home-welcome {
+      padding: 4.25rem 0;
+    }
+
+    .home-welcome__left {
+      gap: 1.35rem;
+    }
+
+    .home-welcome__heading {
+      font-size: clamp(1.55rem, 1.2rem + 2vw, 2.2rem);
+      line-height: 1.04;
+    }
+
+    .home-welcome__desc,
+    .home-welcome__card-para,
+    .home-welcome__card-para--lead,
+    .home-welcome__bullet-text {
+      font-size: 0.93rem;
+    }
+
+    .home-welcome__card {
+      padding: 1.35rem;
+      border-radius: 22px;
+    }
+
+    .home-welcome__card-footer {
+      padding-top: 1rem;
+    }
+
+    .home-welcome__cta {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "title": "Northlane Studio - Digital Product Studio | Bilingual Company Website",
+    "description": "Welcome to Northlane Studio, a bilingual company website for digital product strategy, design systems, web development, and long-term product growth.",
+    "keywords": "digital product studio, bilingual company website, web development agency, product design, English Russian website"
+  },
+  "buttons": {
+    "download": "DOWNLOAD DECK",
+    "login": "CONTACT TEAM",
+    "claim": "GET PROPOSAL"
+  },
+
+  "heroLicense": {
+    "eyebrow": "Bilingual Studio • Digital Product Company",
+    "titleTop": "Trusted partner for",
+    "titleAccent": "modern digital product growth.",
+    "description": "Northlane Studio is built for companies that need a clear, professional, and bilingual website presence. Structured messaging, modern presentation, and consistent service positioning help every visitor quickly understand the studio, its capabilities, and how to start a conversation.",
+    "primaryCta": "Explore Northlane Studio",
+    "secondaryCta": "View capabilities",
+    "stats": [
+      {
+        "value": "EN/RU",
+        "label": "Bilingual company website"
+      },
+      {
+        "value": "Studio",
+        "label": "Strategy and delivery partner"
+      },
+      {
+        "value": "24/7",
+        "label": "Reliable digital presence"
+      }
+    ],
+    "trustLogos": [
+      "Clear positioning",
+      "Professional presentation",
+      "Bilingual structure",
+      "Growth-focused delivery"
+    ],
+    "footnote": "Northlane Studio is designed to present services, expertise, and product thinking with clarity, trust, and consistency."
+  },
+  "homeFaq": {
+    "heading": "NORTHLANE STUDIO FAQ — SERVICES, PROCESS & BILINGUAL WEBSITE DELIVERY",
+    "items": [
+      {
+        "question": "What services does Northlane Studio provide?",
+        "answer": "Northlane Studio provides digital product strategy, UX and UI design, design systems, website design, front-end development, and bilingual company website delivery. Service options are tailored to product teams, startups, and service businesses that need a stronger digital presence."
+      },
+      {
+        "question": "How does a project usually start at Northlane Studio?",
+        "answer": "Projects usually begin with a discovery call, a review of business goals, and an audit of the current website or product presentation. After that, the team defines scope, priorities, and the best delivery format for the website, landing page, or product-focused interface."
+      },
+      {
+        "question": "How fast can Northlane Studio deliver a website?",
+        "answer": "Delivery timelines depend on project scope, content readiness, and the number of required pages. A focused bilingual company website can move quickly, while larger product ecosystems, design systems, and custom feature sets require a longer phased delivery schedule."
+      },
+      {
+        "question": "Is there a minimum project size at Northlane Studio?",
+        "answer": "Project size depends on the format of collaboration. Some clients need a compact landing page or audit, while others need a full bilingual studio website, pricing structure, and reusable content system. The exact scope is defined before production begins."
+      },
+      {
+        "question": "Is working with Northlane Studio secure and professional?",
+        "answer": "Yes. Northlane Studio is positioned as a professional digital partner with a structured workflow, documented process, and clear communication standards. Project materials, timelines, and deliverables are handled through a transparent and organized collaboration model."
+      },
+      {
+        "question": "Can Northlane Studio support both English and Russian website versions?",
+        "answer": "Yes, bilingual delivery is one of the strongest use cases for this structure. Northlane Studio can support English and Russian content presentation, helping brands maintain one clear identity across both language versions without losing consistency in design or messaging."
+      }
+    ]
+  },
+  "trustRoutine": {
+    "title": "NORTHLANE STUDIO WORKFLOW — HOW TO BUILD A CLEAR & CONSISTENT DIGITAL PRESENCE",
+    "cards": [
+      {
+        "number": 1,
+        "icon": "🔗",
+        "title": "START WITH THE RIGHT BUSINESS CONTEXT",
+        "description": "Every strong website begins with the right brief. Clear goals, business context, target audience, and offer positioning help Northlane Studio turn a generic presence into a focused digital product or company website.",
+        "cta": "DEFINE THE BRIEF"
+      },
+      {
+        "number": 2,
+        "icon": "✅",
+        "title": "ALIGN THE CONTENT STRUCTURE",
+        "description": "A professional website needs consistent hierarchy, page logic, and service clarity. Northlane Studio organizes messaging, section order, and page relationships so the final website feels credible and easy to navigate.",
+        "cta": "REVIEW CONTENT FLOW"
+      },
+      {
+        "number": 3,
+        "icon": "🛡️",
+        "title": "BUILD TRUST THROUGH PRESENTATION",
+        "description": "Professional design is not only visual. It also communicates reliability, expertise, and product maturity. Northlane Studio uses structure, language, and design systems to create a stronger company image for international audiences.",
+        "cta": "SEE TRUST PRINCIPLES"
+      },
+      {
+        "number": 4,
+        "icon": "📱",
+        "title": "KEEP THE EXPERIENCE CONSISTENT",
+        "description": "The final website should remain clear across devices, languages, and future updates. Northlane Studio focuses on repeatable structure, responsive presentation, and bilingual readiness so the product stays coherent over time.",
+        "cta": "VIEW DELIVERY APPROACH"
+      }
+    ],
+    "calloutIcon": "/img/trophy.svg",
+    "calloutTitle": "NORTHLANE STUDIO — STRUCTURED, PROFESSIONAL & BILINGUAL BY DESIGN",
+    "calloutDescription": "Northlane Studio is designed for companies that need a clear digital identity, a modern service presentation, and a bilingual website structure that supports trust and growth. Build your next website on a cleaner and more professional foundation.",
+    "calloutCta": "START WITH NORTHLANE"
+  },
+  "homeWelcome": {
+    "heading": "WELCOME TO NORTHLANE STUDIO — A DIGITAL PRODUCT STUDIO WITH BILINGUAL FOCUS",
+    "description": "Welcome to Northlane Studio — a digital product studio and bilingual company website concept built for businesses that value clarity, trust, and modern presentation.",
+    "bullets": [
+      "Northlane Studio presents a clean and professional structure for a digital product studio or bilingual service company.",
+      "The website architecture is designed to explain services, features, products, and pricing with strong clarity.",
+      "Responsive structure and readable hierarchy help the experience remain polished across desktop and mobile devices.",
+      "A bilingual setup makes it easier to present one company identity in both English and Russian without confusion."
+    ],
+    "trustCard": {
+      "paragraphs": [
+        "Northlane Studio is designed to look modern, credible, and presentation-ready.",
+        "Brand identity stays consistent across different sections and screen sizes.",
+        "Content hierarchy is structured for quick scanning and professional readability.",
+        "Navigation stays predictable so visitors can move through the website with confidence.",
+        "The overall pacing supports business communication instead of visual noise.",
+        "A stronger presentation helps visitors trust the team, the offer, and the process.",
+        "Northlane Studio gives a bilingual company website a more universal and scalable foundation."
+      ],
+      "cta": "DISCOVER NORTHLANE STUDIO"
+    }
+  },
+  "platformStandards": {
+    "section1": {
+      "heading": "NORTHLANE STUDIO — PROFESSIONAL WEBSITE STANDARDS & CLEAR DIGITAL OPERATIONS",
+      "description": "This section explains how Northlane Studio approaches professional presentation and operational clarity on a bilingual company website. For modern businesses, trust begins with structure: clear messaging, consistent presentation, and a service architecture that feels reliable from the first screen to the final call to action. Northlane Studio is built on clarity-first principles. Visitors should immediately understand what the company does, who it works with, and how services are delivered. That consistency improves trust, supports stronger brand perception, and makes the website easier to scale across both English and Russian versions. As a digital product studio concept, Northlane Studio emphasizes strategic thinking, modern execution, and a polished online presence. The website is designed to feel stable through predictable navigation, readable hierarchy, and a presentation style that supports both lead generation and long-term brand credibility. If you need a concise overview of why this company website feels more professional and trustworthy, the answer is simple: structured content, disciplined design, and a bilingual foundation that supports clear communication.",
+      "cards": [
+        { "title": "Bilingual", "subtitle": "English and Russian ready" },
+        { "title": "Strategic", "subtitle": "Built around service clarity" },
+        { "title": "Trusted", "subtitle": "Designed for business credibility" },
+        { "title": "Scalable", "subtitle": "Structured for future growth" },
+        { "title": "Studio", "subtitle": "Digital product focused" },
+        { "title": "Consistent", "subtitle": "Unified company presentation" }
+      ]
+    },
+    "section2": {
+      "heading": "NORTHLANE STUDIO — WEBSITE CLARITY, SERVICE STRUCTURE & TRUST SIGNALS",
+      "cards": [
+        {
+          "title": "BILINGUAL COMPANY WEBSITE",
+          "badge": "CLEAR BRAND IDENTITY",
+          "rows": [
+            { "label": "Focus:", "value": "Consistent bilingual presentation" },
+            { "label": "Clarity:", "value": "Clean and readable structure" },
+            {
+              "label": "Consistency:",
+              "value": "Unified experience across pages"
+            },
+            {
+              "label": "Confidence:",
+              "value": "Stronger first impression for clients"
+            }
+          ],
+          "cta": "VIEW WEBSITE STRUCTURE"
+        },
+        {
+          "title": "DIGITAL PRODUCT STUDIO",
+          "badge": "SERVICE POSITIONING SYSTEM",
+          "rows": [
+            { "label": "Model:", "value": "Strategy, design, and development" },
+            {
+              "label": "Authority:",
+              "value": "Professional service presentation"
+            },
+            { "label": "Trust:", "value": "Clear offer and delivery logic" },
+            { "label": "Stability:", "value": "Reliable digital communication" }
+          ],
+          "cta": "REVIEW STUDIO MODEL"
+        },
+        {
+          "title": "ENGLISH + RUSSIAN DELIVERY",
+          "badge": "BUILT FOR BILINGUAL COMMUNICATION",
+          "rows": [
+            { "label": "Region:", "value": "International and local markets" },
+            {
+              "label": "Audience:",
+              "value": "English and Russian speaking clients"
+            },
+            {
+              "label": "Use Case:",
+              "value": "Company websites and service offers"
+            },
+            {
+              "label": "Result:",
+              "value": "Clearer communication across both locales"
+            }
+          ],
+          "cta": "EXPLORE BILINGUAL FLOW"
+        },
+        {
+          "title": "PROFESSIONAL PRESENTATION SYSTEM",
+          "badge": "DESIGN-FIRST BUSINESS TONE",
+          "rows": [
+            {
+              "label": "Safety:",
+              "value": "Stable and structured communication"
+            },
+            { "label": "Legit:", "value": "Credible brand presentation" },
+            {
+              "label": "Verified:",
+              "value": "Clear service and product signals"
+            },
+            {
+              "label": "Reliability:",
+              "value": "Consistent design and hierarchy"
+            }
+          ],
+          "cta": "CHECK PRESENTATION PRINCIPLES"
+        }
+      ]
+    }
+  },
+
+  "disclaimer": "This website template is intended for professional company presentation, digital product studios, and bilingual business websites. Please replace all demo content before public launch."
+}

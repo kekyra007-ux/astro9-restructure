@@ -1,0 +1,293 @@
+---
+interface InfoCard {
+  title: string;
+  subtitle: string;
+}
+
+interface DataRow {
+  label: string;
+  value: string;
+}
+
+interface DetailCard {
+  title: string;
+  badge: string;
+  rows: DataRow[];
+  cta: string;
+}
+
+interface Props {
+  section1: {
+    heading: string;
+    description: string;
+    cards: InfoCard[];
+  };
+  section2: {
+    heading: string;
+    cards: DetailCard[];
+  };
+  ctaHref: string;
+}
+
+const { section1, section2, ctaHref } = Astro.props;
+---
+
+<!-- Section 1: Outer dark card -->
+<section class="trust-platform">
+  <div class="trust-platform__inner">
+
+  
+
+    <!-- Section 2: Detail cards -->
+    <div class="trust-platform__detail-section">
+      <h2 class="trust-platform__detail-heading">{section2.heading}</h2>
+
+      <div class="trust-platform__detail-grid">
+        {section2.cards.map((card) => (
+          <div class="trust-platform__detail-card">
+            <div class="trust-platform__detail-header">
+              <h3 class="trust-platform__detail-title">{card.title}</h3>
+              <span class="trust-platform__badge">{card.badge}</span>
+            </div>
+            <div class="trust-platform__rows">
+              {card.rows.map((row) => (
+                <div class="trust-platform__row">
+                  <span class="trust-platform__row-label">{row.label}</span>
+                  <span class="trust-platform__row-value">{row.value}</span>
+                </div>
+              ))}
+            </div>
+            <a href={ctaHref} class="trust-platform__cta">{card.cta}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .trust-platform {
+    background: var(--color-bg);
+    padding: 5rem 0;
+  }
+
+  .trust-platform__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  /* ── Box (screenshot 2) ── */
+  .trust-platform__box {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 1.5rem;
+    padding: 3.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .trust-platform__box-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+    font-weight: 900;
+    color: var(--color-text);
+    text-align: center;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .trust-platform__box-desc {
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Info cards grid 3×2 */
+  .trust-platform__info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .trust-platform__info-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-align: center;
+    transition: border-color var(--transition);
+  }
+
+  .trust-platform__info-card:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust-platform__info-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .trust-platform__info-sub {
+    font-size: 0.83rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ── Detail section (screenshot 3) ── */
+  .trust-platform__detail-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .trust-platform__detail-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 900;
+    color: var(--color-text);
+    text-align: center;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* 2×2 detail grid */
+  .trust-platform__detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .trust-platform__detail-card {
+    background: #FFFFFF;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+
+  .trust-platform__detail-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-indigo);
+  }
+
+  /* Card header */
+  .trust-platform__detail-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .trust-platform__detail-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .trust-platform__badge {
+    display: inline-block;
+    padding: 0.35rem 1.1rem;
+    background: #EEF2FF;
+    color: var(--color-primary);
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border: 1px solid #C7D2FE;
+    border-radius: 999px;
+  }
+
+  /* Data rows */
+  .trust-platform__rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .trust-platform__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid rgba(15,23,42,0.06);
+  }
+
+  .trust-platform__row:last-child {
+    border-bottom: none;
+  }
+
+  .trust-platform__row-label {
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .trust-platform__row-value {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-align: right;
+  }
+
+  /* CTA button */
+  .trust-platform__cta {
+    display: block;
+    padding: 0.85rem 1.5rem;
+    background: var(--color-primary);
+    color: #FFFFFF;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(99,102,241,0.2);
+    transition: opacity var(--transition);
+  }
+
+  .trust-platform__cta:hover {
+    opacity: 0.88;
+  }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .trust-platform__info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .trust-platform__detail-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .trust-platform__info-grid {
+      grid-template-columns: 1fr;
+    }
+    .trust-platform__box {
+      padding: 2rem 1.25rem;
+    }
+  }
+</style>

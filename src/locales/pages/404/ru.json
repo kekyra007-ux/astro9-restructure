@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Hindi Nahanap ang Pahina — OKABCPH Philippines",
+    "description": "Ang pahinang hinahanap mo ay wala o inilipat na. Bumalik sa opisyal na OKABCPH website para magpatuloy.",
+    "keywords": "404, hindi nahanap, error, okabcph"
+  },
+  "error": {
+    "code": "404",
+    "title": "Hindi Nahanap ang Pahina",
+    "subtitle": "Ang pahinang hinahanap mo ay wala o inilipat na."
+  },
+  "actions": {
+    "home": {
+      "label": "Umuwi sa Home",
+      "href": "/tl/"
+    },
+    "play": {
+      "label": "Maglaro Ngayon"
+    }
+  },
+  "quickLinks": {
+    "label": "Mabilis na mga link:",
+    "items": [
+      { "label": "Home",      "href": "/tl/" },
+      { "label": "Access",    "href": "/tl/link" },
+      { "label": "Register",  "href": "/tl/register" },
+      { "label": "Bonuses",   "href": "/tl/bonuses" }
+    ]
+  }
+}

@@ -1,0 +1,201 @@
+---
+/**
+ * PaymentsArticle.astro — Article section for home page payments area.
+ *
+ * Design:
+ *   • Horizontal rule separators (top & bottom)
+ *   • Gold uppercase centered H2
+ *   • 2 body paragraphs
+ *   • Gold gradient blockquote
+ *   • Checkmark list
+ *   • Conclusion paragraph
+ *   • Pill CTA button
+ *
+ * Props:
+ *   data     object   — paymentsArticle from locale JSON
+ *   ctaHref  string   — link target
+ */
+
+interface Props {
+  data: {
+    title: string;
+    paragraphs: string[];
+    blockquote: string;
+    checkItems: string[];
+    conclusion: string;
+    cta: string;
+  };
+  ctaHref?: string;
+}
+
+const { data, ctaHref = '#' } = Astro.props;
+---
+
+<section class="pay-article">
+  <div class="pay-article__container">
+
+    <h2 class="pay-article__title">{data.title}</h2>
+
+    {data.paragraphs.map((p) => (
+      <p class="pay-article__para">{p}</p>
+    ))}
+
+    <blockquote class="pay-article__blockquote">{data.blockquote}</blockquote>
+
+    <ul class="pay-article__list">
+      {data.checkItems.map((item) => (
+        <li class="pay-article__list-item">
+          <span class="pay-article__check" aria-hidden="true">✓</span>
+          {item}
+        </li>
+      ))}
+    </ul>
+
+    <p class="pay-article__conclusion">{data.conclusion}</p>
+
+    <div class="pay-article__cta-wrap">
+      <a class="pay-article__cta" href={ctaHref}>{data.cta}</a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.pay-article {
+  background: #F8FAFC;
+  color: #fff;
+  padding: 56px 20px;
+  border-top: 1px solid rgba(99,102,241, 0.25);
+  border-bottom: 1px solid rgba(99,102,241, 0.25);
+}
+
+.pay-article__container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Title ── */
+.pay-article__title {
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 900;
+  color: #818CF8;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.25;
+  margin: 0 0 32px;
+}
+
+/* ── Paragraphs ── */
+.pay-article__para,
+.pay-article__conclusion {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #64748B;
+  margin: 0 0 20px;
+}
+
+/* ── Blockquote ── */
+.pay-article__blockquote {
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 50%, #6366F1 100%);
+  border-radius: 12px;
+  padding: 22px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.65;
+  text-align: center;
+  margin: 28px 0;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* ── Checklist ── */
+.pay-article__list {
+  list-style: none;
+  margin: 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+}
+
+.pay-article__list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.pay-article__check {
+  color: #818CF8;
+  font-size: 17px;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── CTA ── */
+.pay-article__cta-wrap {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pay-article__cta {
+  display: inline-block;
+  padding: 14px 40px;
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 50%, #6366F1 100%);
+  color: #fff;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.35);
+}
+
+.pay-article__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.5);
+  color: #fff;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .pay-article { padding: 40px 16px; }
+  .pay-article__para,
+  .pay-article__conclusion { font-size: 15px; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .pay-article { padding: 30px 12px; }
+
+  .pay-article__blockquote {
+    padding: 16px 18px;
+    font-size: 14px;
+  }
+
+  .pay-article__list-item { font-size: 14px; }
+
+  .pay-article__cta {
+    width: 100%;
+    text-align: center;
+    padding: 14px 24px;
+  }
+
+  .pay-article__cta-wrap { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .pay-article__blockquote { font-size: 13px; }
+  .pay-article__list-item  { font-size: 13px; }
+  .pay-article__para,
+  .pay-article__conclusion { font-size: 14px; }
+}
+</style>

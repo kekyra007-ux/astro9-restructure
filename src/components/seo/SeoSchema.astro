@@ -1,0 +1,164 @@
+---
+/**
+ * src/components/seo/SeoSchema.astro
+ * Base JSON-LD structured data (Philippines, current pages)
+ */
+import { ENV } from '../../utils/env';
+
+type PageSlug = 'home' | 'about' | 'features' | 'products' | 'pricing' | 'contact';
+
+interface Props {
+  slug:            PageSlug;
+  pageName:        string;
+  pageDescription: string;
+  pageUrl:         string;
+  imagePath?:      string;
+}
+
+const {
+  slug,
+  pageName,
+  pageDescription,
+  pageUrl,
+  imagePath = '/img/og.jpg',
+} = Astro.props;
+
+const baseUrl     = ENV.DOMAIN;
+const brandName   = ENV.BRAND || 'OKABCPH';
+const countryName = 'Philippines';
+const countryCode = 'PH';
+const city        = 'Manila';
+const postalCode  = '1000';
+const htmlLang    = 'en-PH';
+
+const PAGE_CONFIG: Record<PageSlug, { pageType: string; breadcrumb: string; path: string; catalogItems?: {name:string;path:string}[]; howTo?: boolean }> = {
+  home: {
+    pageType: 'WebPage',
+    breadcrumb: 'Home',
+    path: '/',
+  },
+  about: {
+    pageType: 'WebPage',
+    breadcrumb: 'About',
+    path: '/about',
+  },
+  features: {
+    pageType: 'CollectionPage',
+    breadcrumb: 'Features',
+    path: '/features',
+    catalogItems: [
+      { name: 'Core Features',   path: '/features#core' },
+      { name: 'Integrations',    path: '/features#integrations' },
+      { name: 'Analytics',       path: '/features#analytics' },
+      { name: 'Security',        path: '/features#security' },
+    ],
+  },
+  products: {
+    pageType: 'CollectionPage',
+    breadcrumb: 'Products',
+    path: '/products',
+    catalogItems: [
+      { name: 'Starter',         path: '/products#starter' },
+      { name: 'Pro',             path: '/products#pro' },
+      { name: 'Enterprise',      path: '/products#enterprise' },
+      { name: 'API',             path: '/products#api' },
+    ],
+  },
+  pricing: {
+    pageType: 'WebPage',
+    breadcrumb: 'Pricing',
+    path: '/pricing',
+    howTo: true,
+  },
+  contact: {
+    pageType: 'WebPage',
+    breadcrumb: 'Contact',
+    path: '/contact',
+  },
+};
+
+const cfg           = PAGE_CONFIG[slug];
+const pageAnchorBase = slug === 'home' ? baseUrl : pageUrl;
+
+const graph: any[] = [
+  {
+    '@type': 'Organization',
+    '@id':   `${baseUrl}/#organization`,
+    name:    brandName,
+    url:     `${baseUrl}/`,
+    logo:    `${baseUrl}/img/logo_mini.webp`,
+    sameAs:  [],
+    address: {
+      '@type':           'PostalAddress',
+      streetAddress:     'Online Service',
+      addressLocality:   city,
+      postalCode,
+      addressCountry:    countryCode,
+    },
+  },
+  {
+    '@type':    'WebSite',
+    '@id':      `${baseUrl}/#website`,
+    url:        `${baseUrl}/`,
+    name:       `${brandName} ${countryName}`,
+    publisher:  { '@id': `${baseUrl}/#organization` },
+    potentialAction: {
+      '@type':       'SearchAction',
+      target:        `${baseUrl}/search?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@type':              cfg.pageType,
+    '@id':                `${pageAnchorBase}/#webpage`,
+    url:                  pageUrl,
+    name:                 pageName,
+    inLanguage:           htmlLang,
+    isPartOf:             { '@id': `${baseUrl}/#website` },
+    about:                { '@id': `${baseUrl}/#organization` },
+    description:          pageDescription,
+    primaryImageOfPage:   { '@type': 'ImageObject', url: `${baseUrl}${imagePath}` },
+  },
+];
+
+if (cfg.catalogItems) {
+  graph.push({
+    '@type': 'OfferCatalog',
+    '@id':   `${pageAnchorBase}/#catalog`,
+    name:    `${cfg.breadcrumb} Categories`,
+    itemListElement: cfg.catalogItems.map((item) => ({
+      '@type': 'OfferCatalog',
+      name:    item.name,
+      url:     `${baseUrl}${item.path}`,
+    })),
+  });
+}
+
+if (cfg.howTo) {
+  graph.push({
+    '@type':      'HowTo',
+    '@id':        `${pageAnchorBase}/#howto`,
+    name:         `How to register at ${brandName}`,
+    description:  pageDescription,
+    step: [
+      { '@type': 'HowToStep', name: 'Open the register page', text: `Go to ${pageUrl}.` },
+      { '@type': 'HowToStep', name: 'Fill in your details',   text: 'Enter your PH mobile number, email, and a secure password.' },
+      { '@type': 'HowToStep', name: 'Confirm OTP',            text: 'Verify your number via the OTP sent to your phone.' },
+      { '@type': 'HowToStep', name: 'Complete setup',         text: 'Finish account setup and access your okabcph login.' },
+    ],
+  });
+}
+
+graph.push({
+  '@type': 'BreadcrumbList',
+  '@id':   `${pageAnchorBase}/#breadcrumb`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${baseUrl}/` },
+    ...(slug !== 'home' ? [{ '@type': 'ListItem', position: 2, name: cfg.breadcrumb, item: pageUrl }] : []),
+  ],
+});
+
+const schemaData = { '@context': 'https://schema.org', '@graph': graph };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

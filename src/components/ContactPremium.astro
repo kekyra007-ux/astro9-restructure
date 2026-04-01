@@ -1,0 +1,630 @@
+---
+interface Stat {
+  value: string;
+  label: string;
+}
+
+interface Teaser {
+  eyebrow: string;
+  title: string;
+  text: string;
+  avatars?: string[];
+}
+
+interface Showcase {
+  image: string;
+  title: string;
+  text: string;
+}
+
+interface ContactFormContent {
+  eyebrow: string;
+  title: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: string;
+  submit: string;
+  policy: string;
+}
+
+interface Props {
+  intro: {
+    eyebrow: string;
+    heading: string;
+    description: string;
+    stats: Stat[];
+    cta: string;
+    ctaHref: string;
+    image: string;
+  };
+  teaser: Teaser;
+  showcase: Showcase;
+  form: ContactFormContent;
+}
+
+const { intro, teaser, showcase, form } = Astro.props;
+---
+
+<section class="contact-premium">
+  <div class="contact-premium__container">
+    <div class="contact-premium__hero">
+      <div class="contact-premium__hero-copy">
+        <span class="contact-premium__eyebrow">
+          <span class="contact-premium__eyebrow-dot"></span>
+          {intro.eyebrow}
+        </span>
+
+        <h1 class="contact-premium__title">{intro.heading}</h1>
+        <p class="contact-premium__description">{intro.description}</p>
+
+        <div class="contact-premium__stats">
+          {intro.stats.map((item) => (
+            <div class="contact-premium__stat">
+              <div class="contact-premium__stat-value">{item.value}</div>
+              <div class="contact-premium__stat-label">{item.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <a href={intro.ctaHref} class="contact-premium__hero-cta">
+          {intro.cta}
+        </a>
+      </div>
+
+      <div class="contact-premium__hero-media">
+        <div class="contact-premium__hero-image-shell">
+          <img
+            src={intro.image}
+            alt={intro.heading}
+            class="contact-premium__hero-image"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-premium__grid">
+      <div class="contact-premium__left">
+        <article class="contact-premium__teaser-card">
+          <div class="contact-premium__teaser-top">
+            <span class="contact-premium__mini-eyebrow">{teaser.eyebrow}</span>
+          </div>
+
+          <div class="contact-premium__teaser-body">
+            <h2 class="contact-premium__teaser-title">{teaser.title}</h2>
+            <p class="contact-premium__teaser-text">{teaser.text}</p>
+          </div>
+
+        </article>
+
+        <article class="contact-premium__showcase-card">
+          <div class="contact-premium__showcase-media">
+            <img
+              src={showcase.image}
+              alt={showcase.title}
+              class="contact-premium__showcase-image"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="contact-premium__showcase-overlay">
+            <h3 class="contact-premium__showcase-title">{showcase.title}</h3>
+            <p class="contact-premium__showcase-text">{showcase.text}</p>
+          </div>
+        </article>
+      </div>
+
+      <article class="contact-premium__form-card">
+        <span class="contact-premium__mini-eyebrow">{form.eyebrow}</span>
+        <h2 class="contact-premium__form-title">{form.title}</h2>
+
+        <form class="contact-premium__form">
+          <div class="contact-premium__row">
+            <label class="contact-premium__field">
+              <span class="contact-premium__label">{form.firstName}</span>
+              <input type="text" placeholder="John" class="contact-premium__input" />
+            </label>
+
+            <label class="contact-premium__field">
+              <span class="contact-premium__label">{form.lastName}</span>
+              <input type="text" placeholder="Doe" class="contact-premium__input" />
+            </label>
+          </div>
+
+          <label class="contact-premium__field">
+            <span class="contact-premium__label">{form.email}</span>
+            <input type="email" placeholder="johndoe@email.com" class="contact-premium__input" />
+          </label>
+
+          <label class="contact-premium__field">
+            <span class="contact-premium__label">{form.message}</span>
+            <textarea placeholder="Write your message" class="contact-premium__textarea"></textarea>
+          </label>
+
+          <button type="submit" class="contact-premium__submit">
+            {form.submit}
+          </button>
+
+          <p class="contact-premium__policy">{form.policy}</p>
+        </form>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-premium {
+    background:
+      radial-gradient(circle at top center, rgba(99, 102, 241, 0.06) 0%, transparent 24%),
+      var(--main-bg);
+    padding: 5.5rem 0 6rem;
+  }
+
+  .contact-premium__container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-premium__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 1.25rem 0 0.5rem;
+  }
+
+  .contact-premium__hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    min-width: 0;
+  }
+
+  .contact-premium__eyebrow,
+  .contact-premium__mini-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.1rem;
+    padding: 0 0.9rem;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    color: var(--color-primary);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .contact-premium__eyebrow-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-three);
+    box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.14);
+    flex-shrink: 0;
+  }
+
+  .contact-premium__title {
+    margin: 0;
+    font-family: var(--font-display);
+  font-size: clamp(1.9rem, 1.3rem + 1.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+    color: var(--color-text);
+    text-wrap: balance;
+  }
+
+  .contact-premium__description {
+    margin: 0;
+    max-width: 62ch;
+    font-size: 1rem;
+    line-height: 1.78;
+    color: var(--color-text-secondary);
+  }
+
+  .contact-premium__stats {
+    width: 100%;
+    max-width: 720px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .contact-premium__stat {
+    padding: 1rem 1rem 0.95rem;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,255,0.92) 100%);
+    border: 1px solid rgba(226, 232, 240, 0.86);
+    box-shadow:
+      0 10px 24px rgba(15, 23, 42, 0.04),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+
+  .contact-premium__stat-value {
+    margin-bottom: 0.45rem;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  .contact-premium__stat-label {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .contact-premium__hero-cta {
+    min-height: 3.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.35rem;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--color-three) 0%, var(--color-four) 100%);
+    color: var(--color-two);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    box-shadow: var(--shadow-indigo);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition),
+      filter var(--transition);
+  }
+
+  .contact-premium__hero-cta:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: var(--shadow-indigo-lg);
+  }
+
+  .contact-premium__hero-media {
+    min-width: 0;
+  }
+
+  .contact-premium__hero-image-shell {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+
+  }
+
+  .contact-premium__hero-image-shell::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .contact-premium__hero-image {
+    width: 100%;
+    height: 100%;
+    min-height: 560px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .contact-premium__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .contact-premium__left {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 1.5rem;
+  }
+
+  .contact-premium__teaser-card,
+  .contact-premium__form-card {
+    position: relative;
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,255,0.92) 100%);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow:
+      0 16px 34px rgba(15, 23, 42, 0.06),
+      inset 0 1px 0 rgba(255,255,255,0.82);
+    overflow: hidden;
+  }
+
+  .contact-premium__teaser-card {
+    padding: 1.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .contact-premium__teaser-card::before,
+  .contact-premium__form-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-three) 0%, #818cf8 55%, #a5b4fc 100%);
+  }
+
+  .contact-premium__teaser-title {
+    margin: 0 0 15px;
+    max-width: 18ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 1.1rem + 1vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+  }
+
+  .contact-premium__teaser-text {
+    margin: 0;
+    max-width: 56ch;
+    font-size: 0.98rem;
+    line-height: 1.72;
+    color: var(--color-text-secondary);
+  }
+
+  .contact-premium__avatars {
+    display: flex;
+    align-items: center;
+    margin-top: 0.25rem;
+  }
+
+  .contact-premium__avatar {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--color-surface);
+    margin-left: -10px;
+    box-shadow: var(--shadow-sm);
+    background: var(--color-surface-alt);
+  }
+
+  .contact-premium__avatar:first-child {
+    margin-left: 0;
+  }
+
+  .contact-premium__showcase-card {
+    position: relative;
+    min-height: 380px;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 20px 36px rgba(15, 23, 42, 0.08);
+    background: var(--color-three);
+  }
+
+  .contact-premium__showcase-media,
+  .contact-premium__showcase-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .contact-premium__showcase-image {
+    display: block;
+    object-fit: cover;
+  }
+
+  .contact-premium__showcase-overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 1.5rem;
+    background: linear-gradient(180deg, rgba(15,23,42,0) 0%, rgba(8, 22, 54, 0.9) 50%);
+    color: var(--color-two);
+  }
+
+  .contact-premium__showcase-title {
+    margin: 0 0 0.45rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--color-two);
+  }
+
+  .contact-premium__showcase-text {
+    margin: 0;
+    max-width: 48ch;
+    font-size: 0.96rem;
+    line-height: 1.68;
+    color: rgba(255,255,255,0.84);
+  }
+
+  .contact-premium__form-card {
+    padding: 1.7rem;
+  }
+
+  .contact-premium__form-title {
+    margin: 0.85rem 0 1.5rem;
+    font-family: var(--font-display);
+     font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+    color: var(--color-text);
+  }
+
+  .contact-premium__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+
+  .contact-premium__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .contact-premium__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .contact-premium__label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .contact-premium__input,
+  .contact-premium__textarea {
+    width: 100%;
+    border: 1px solid rgba(203, 213, 225, 0.9);
+    background: rgba(255,255,255,0.88);
+    color: var(--color-text);
+    border-radius: 14px;
+    font: inherit;
+    transition:
+      border-color var(--transition),
+      box-shadow var(--transition),
+      background var(--transition);
+    outline: none;
+  }
+
+  .contact-premium__input {
+    min-height: 52px;
+    padding: 0 1rem;
+  }
+
+  .contact-premium__textarea {
+    min-height: 160px;
+    padding: 1rem;
+    resize: vertical;
+  }
+
+  .contact-premium__input::placeholder,
+  .contact-premium__textarea::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .contact-premium__input:focus,
+  .contact-premium__textarea:focus {
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+    background: var(--color-surface);
+  }
+
+  .contact-premium__submit {
+    min-height: 54px;
+    border: 0;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--color-three) 0%, var(--color-four) 100%);
+    color: var(--color-two);
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    box-shadow: var(--shadow-indigo);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition),
+      filter var(--transition);
+  }
+
+  .contact-premium__submit:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: var(--shadow-indigo-lg);
+  }
+
+  .contact-premium__policy {
+    margin: 0;
+    text-align: center;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 1100px) {
+    .contact-premium__hero {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-premium__hero-image {
+      min-height: 420px;
+    }
+
+    .contact-premium__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-premium {
+      padding: 4.5rem 0 5rem;
+    }
+
+    .contact-premium__container {
+      gap: 1.5rem;
+    }
+
+    .contact-premium__stats {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-premium__row {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-premium__teaser-card,
+    .contact-premium__form-card {
+      padding: 1.3rem;
+      border-radius: 22px;
+    }
+
+    .contact-premium__showcase-card,
+    .contact-premium__hero-image-shell {
+      border-radius: 22px;
+    }
+
+    .contact-premium__showcase-card {
+      min-height: 320px;
+    }
+
+    .contact-premium__hero-image {
+      min-height: 320px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-premium__title {
+      max-width: 100%;
+    }
+
+    .contact-premium__hero-copy {
+      gap: 1rem;
+    }
+
+    .contact-premium__showcase-overlay {
+      padding: 1.15rem;
+    }
+
+    .contact-premium__showcase-title {
+      font-size: 1.3rem;
+    }
+
+    .contact-premium__showcase-text,
+    .contact-premium__description,
+    .contact-premium__teaser-text {
+      font-size: 0.93rem;
+    }
+  }
+</style>

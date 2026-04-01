@@ -1,0 +1,161 @@
+---
+/**
+ * src/pages/404.astro
+ * Custom 404 error page
+ * Content loaded from locales/pages/404/en.json
+ */
+import PageLayout from "../layouts/PageLayout.astro";
+import { ENV } from "../utils/env";
+import { getLocale } from "../utils/i18n";
+
+const t = getLocale("404", "en");
+---
+
+<PageLayout
+  title={t.meta.title}
+  description={t.meta.description}
+  slug="home"
+  bareHeader={true}
+>
+  <script>window.location.replace('/en/');</script>
+  <section class="error-section">
+    <div class="container error-container">
+      <div class="error-glow" aria-hidden="true"></div>
+
+      <div class="error-code" aria-hidden="true">{t.error.code}</div>
+
+      <h1 class="error-title">{t.error.title}</h1>
+      <p class="error-subtitle">
+        {t.error.subtitle}
+      </p>
+
+      <div class="error-actions">
+        <a href={t.actions.home.href} class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          {t.actions.home.label}
+        </a>
+        <a href={ENV.REF} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          {t.actions.play.label}
+        </a>
+      </div>
+
+      <nav class="error-nav" aria-label="Quick links">
+        <p class="error-nav-label">{t.quickLinks.label}</p>
+        <ul role="list">
+          {t.quickLinks.items.map((item: any) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .error-section {
+    min-height: calc(100dvh - 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-block: 4rem;
+  }
+
+  .error-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse at center,
+      rgba(99,102,241,0.08) 0%,
+      transparent 65%
+    );
+    pointer-events: none;
+    filter: blur(40px);
+  }
+
+  .error-container {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .error-code {
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 20vw, 12rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.5;
+    user-select: none;
+  }
+
+  .error-title {
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    margin-top: -0.5rem;
+  }
+
+  .error-subtitle {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    max-width: 40ch;
+    line-height: 1.6;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .error-nav {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+    max-width: 480px;
+  }
+  .error-nav-label {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .error-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .error-nav a {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all var(--transition);
+  }
+  .error-nav a:hover {
+    color: var(--color-text);
+    border-color: var(--color-primary);
+  }
+</style>

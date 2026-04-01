@@ -1,0 +1,37 @@
+---
+/**
+ * src/components/seo/SeoOG.astro
+ * Base OG / Twitter meta tags for social sharing (Philippines)
+ */
+import { ENV } from '../../utils/env';
+
+interface Props {
+  title?: string;
+  description?: string;
+  url?: string;
+  image?: string;
+}
+
+const {
+  title = 'Welcome',
+  description = '',
+  url = ENV.DOMAIN,
+  image = `${ENV.DOMAIN}/img/og.jpg`,
+} = Astro.props;
+
+const brandName = ENV.BRAND || 'OKABCPH';
+const ogLocale  = 'en_PH';
+---
+
+<meta property="og:type"        content="website" />
+<meta property="og:url"         content={url} />
+<meta property="og:title"       content={title} />
+{description && <meta property="og:description" content={description} />}
+<meta property="og:image"       content={image} />
+<meta property="og:site_name"   content={brandName} />
+<meta property="og:locale"      content={ogLocale} />
+
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:title"       content={title} />
+{description && <meta name="twitter:description" content={description} />}
+<meta name="twitter:image"       content={image} />

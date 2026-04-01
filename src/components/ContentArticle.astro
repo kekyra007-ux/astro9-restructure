@@ -1,0 +1,354 @@
+---
+/**
+ * LinkArticle.astro — Article content section for the Link page.
+ *
+ * Design (screen 1):
+ *   • H2 title
+ *   • 4 info cards (Verified / Working / Secure / Mobile Ready)
+ *   • 2 body paragraphs
+ *   • Gold blockquote callout
+ *   • Body paragraph
+ *   • Bullet list with ✓ checkmarks
+ *   • 3 CTA buttons (1 primary gold, 2 outline)
+ *
+ * Props:
+ *   data     object  — linkArticle object from locale JSON
+ *   ctaHref  string  — URL for CTA buttons (defaults to PUBLIC_REF)
+ */
+
+interface Card { title: string; subtitle: string; }
+interface Cta  { label: string; primary: boolean; }
+
+interface Props {
+  data: {
+    title:      string;
+    cards:      Card[];
+    para1:      string;
+    para2:      string;
+    blockquote: string;
+    para3:      string;
+    bullets:    string[];
+    ctas:       Cta[];
+  };
+  ctaHref?: string;
+}
+
+const { data, ctaHref } = Astro.props;
+const ref          = import.meta.env.PUBLIC_REF ?? '#';
+const resolvedHref = ctaHref ?? ref;
+---
+
+<section class="la-section">
+  <div class="la-container">
+
+    <h2 class="la-title">{data.title}</h2>
+
+    <!-- Cards row -->
+    <div class="la-cards">
+      {data.cards.map(({ title, subtitle }) => (
+        <div class="la-card">
+          <span class="la-card__title">{title}</span>
+          <span class="la-card__subtitle">{subtitle}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Body text -->
+    <p class="la-text">{data.para1}</p>
+    <p class="la-text">{data.para2}</p>
+
+    <!-- Blockquote -->
+    <blockquote class="la-blockquote">
+      {data.blockquote}
+    </blockquote>
+
+    <p class="la-text">{data.para3}</p>
+
+    <!-- Bullet list -->
+    <ul class="la-bullets">
+      {data.bullets.map((bullet) => (
+        <li class="la-bullet">
+          <span class="la-bullet__check">✓</span>
+          <span>{bullet}</span>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA buttons -->
+    <div class="la-ctas">
+      {data.ctas.map(({ label, primary }) => (
+        <a
+          href={resolvedHref}
+          class={primary ? 'la-btn la-btn--primary' : 'la-btn la-btn--outline'}
+          rel="noopener noreferrer"
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>
+<style>
+.la-section {
+  background: var(--color-surface);
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+
+.la-container {
+  width: 100%;
+  max-width: 1160px;
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.la-title {
+  margin: 0;
+  max-width: 16ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 1.3rem + 1.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+/* Cards */
+.la-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.la-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-height: 132px;
+  padding: 1.25rem 1.1rem;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,255,0.92) 100%);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255,255,255,0.82);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+  overflow: hidden;
+}
+
+.la-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6366F1 0%, #818CF8 52%, #A5B4FC 100%);
+}
+
+.la-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.18);
+  box-shadow:
+    0 16px 32px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.84);
+}
+
+.la-card__title {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+.la-card__subtitle {
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* Body text */
+.la-text {
+  margin: 0;
+  max-width: 78ch;
+  font-size: 0.98rem;
+  line-height: 1.82;
+  color: var(--color-text-secondary);
+}
+
+/* Blockquote */
+.la-blockquote {
+  position: relative;
+  margin: 0;
+  padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(99,102,241,0.06) 0%, rgba(99,102,241,0.03) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.la-blockquote::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  border-radius: 22px 0 0 22px;
+  background: linear-gradient(180deg, #6366F1 0%, #4F46E5 100%);
+}
+
+/* Bullets */
+.la-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.95rem 1.25rem;
+}
+
+.la-bullet {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+.la-bullet__check {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.08rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99, 102, 241, 0.08);
+  color: #4F46E5;
+  font-size: 0.78rem;
+  font-weight: 800;
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.08);
+  flex-shrink: 0;
+}
+
+/* CTAs */
+.la-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  padding-top: 0.25rem;
+}
+
+.la-btn {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.35rem;
+  border-radius: 14px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.la-btn--primary {
+  background: linear-gradient(180deg, #6366F1 0%, #4F46E5 100%);
+  color: #FFFFFF;
+  box-shadow: 0 12px 22px rgba(79, 70, 229, 0.2);
+}
+
+.la-btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(79, 70, 229, 0.28);
+  color: #FFFFFF;
+}
+
+.la-btn--outline {
+  background: rgba(255,255,255,0.82);
+  color: var(--color-text);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.la-btn--outline:hover {
+  border-color: rgba(99, 102, 241, 0.18);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .la-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .la-bullets {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .la-container {
+    gap: 1.5rem;
+  }
+
+  .la-ctas {
+    flex-direction: column;
+  }
+
+  .la-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .la-blockquote {
+    padding: 1.2rem 1.1rem 1.2rem 1.35rem;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .la-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .la-card {
+    min-height: auto;
+  }
+
+  .la-text,
+  .la-bullet,
+  .la-blockquote {
+    font-size: 0.92rem;
+  }
+}
+</style>

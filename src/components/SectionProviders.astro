@@ -1,0 +1,118 @@
+---
+/**
+ * SectionProviders.astro — Game providers grid.
+ *
+ * Design: centered heading + optional intro text, 4-column grid of dark cards.
+ *
+ * Props:
+ *   heading   string              — H2 title
+ *   body      string              — optional intro paragraph
+ *   providers Array<{name, description}> — provider cards
+ *   bgAlt     boolean             — alternate background
+ */
+
+interface Provider { name: string; description: string; }
+
+interface Props {
+  heading:   string;
+  body?:     string;
+  providers: Provider[];
+  bgAlt?:    boolean;
+}
+
+const { heading, body, providers, bgAlt = false } = Astro.props;
+---
+
+<section class:list={['section-providers', { 'section-providers--alt': bgAlt }]}>
+  <div class="container">
+    <div class="providers__header">
+      <h2 class="providers__title">{heading}</h2>
+      {body && <p class="providers__body">{body}</p>}
+    </div>
+
+    <div class="providers__grid">
+      {providers.map(({ name, description }) => (
+        <div class="provider-card">
+          <strong class="provider-card__name">{name}</strong>
+          <p class="provider-card__desc">{description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.section-providers {
+  padding: 64px 0;
+  background-color: var(--main-bg);
+}
+.section-providers--alt {
+  background-color: var(--page-bg);
+}
+
+.providers__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.providers__title {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.providers__body {
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* 4-column grid */
+.providers__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.provider-card {
+  background: var(--color-surface, #12121a);
+  border: 1px solid rgba(15,23,42,0.08);
+  border-radius: 12px;
+  padding: 22px 18px;
+}
+
+.provider-card__name {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.provider-card__desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Tablet ── */
+@media (max-width: 860px) {
+  .providers__grid { grid-template-columns: repeat(2, 1fr); }
+  .section-providers { padding: 48px 0; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .providers__grid { grid-template-columns: 1fr; gap: 12px; }
+  .section-providers { padding: 36px 0; }
+  .providers__title { font-size: 22px; }
+}
+</style>

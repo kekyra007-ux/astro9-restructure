@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Pricing — Plans & Access",
+    "description": "Simple, transparent pricing. Choose the plan that fits your needs."
+  },
+  "hero": {
+    "title": "Pricing",
+    "description": "Clear, straightforward plans with no hidden fees. Get started today.",
+    "tags": ["Transparent Pricing", "No Hidden Fees", "Flexible Plans"],
+    "topButtons": [],
+    "cta": "Get Started",
+    "img": ""
+  },
+  "loginGuide": {
+    "titleWhite": "Account Setup Guide —",
+    "titleGold": "Getting Started in Minutes",
+    "paragraphs": [
+      "Setting up your account is quick and straightforward. Follow the steps below to get started.",
+      "Once your account is active, you'll have access to all features included in your chosen plan."
+    ],
+    "bullets": [
+      "Create your account with a valid email address",
+      "Choose the plan that fits your needs",
+      "Complete the verification process",
+      "Access all features immediately after setup",
+      "Contact support anytime if you need assistance"
+    ],
+    "conclusion": "Getting started takes just a few minutes. Our team is available to help you through the setup process whenever needed."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How do I get started?",
+        "answer": "Simply create an account, choose your plan, and complete the verification process. You'll have access within minutes."
+      },
+      {
+        "question": "Can I change my plan later?",
+        "answer": "Yes, you can upgrade or downgrade your plan at any time. Changes take effect at the start of the next billing cycle."
+      },
+      {
+        "question": "Is there a free trial?",
+        "answer": "We offer a trial period so you can explore all features before committing. No credit card required."
+      },
+      {
+        "question": "How does billing work?",
+        "answer": "Billing is monthly or annual depending on the plan you choose. Annual plans include a discount compared to monthly billing."
+      }
+    ]
+  }
+}

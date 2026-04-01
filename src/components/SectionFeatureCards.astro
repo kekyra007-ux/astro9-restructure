@@ -1,0 +1,207 @@
+---
+/**
+ * SectionFeatureCards.astro
+ *
+ * Two display modes controlled by `columns` prop:
+ *   columns=3 (default) — 3-col grid, cards have no inner CTAs,
+ *                         optional section-level buttons below grid.
+ *                         Example: "Core Highlights for Players"
+ *   columns=2           — 2-col grid, each card may carry its own CTAs.
+ *                         Example: "Exclusive Casino Bonuses"
+ *
+ * Card styling: dark rounded card, bold title, teal/green accent rule, description.
+ *
+ * Props:
+ *   heading   string
+ *   body      string   — optional intro paragraph (left-aligned)
+ *   items     CardItem[]
+ *   columns   2 | 3    — grid columns (default 3)
+ *   cta1      CtaLink  — optional section-level primary button
+ *   cta2      CtaLink  — optional section-level secondary button
+ *   bgDark    boolean  — slightly lighter bg variant
+ */
+
+interface CtaLink  { text: string; href: string; }
+interface CardItem {
+  title:       string;
+  description: string;
+  cta1?:       CtaLink;
+  cta2?:       CtaLink;
+}
+
+interface Props {
+  heading:  string;
+  body?:    string;
+  items:    CardItem[];
+  columns?: 2 | 3;
+  cta1?:    CtaLink;
+  cta2?:    CtaLink;
+  bgDark?:  boolean;
+}
+
+const {
+  heading,
+  body,
+  items,
+  columns = 3,
+  cta1,
+  cta2,
+  bgDark = false,
+} = Astro.props;
+---
+
+<section class:list={['sec-fc', { 'sec-fc--dark': bgDark }, `sec-fc--cols-${columns}`]}>
+  <div class="container">
+    <div class="sec-fc__header">
+      <h2 class="sec-fc__title">{heading}</h2>
+      {body && <p class="sec-fc__body">{body}</p>}
+    </div>
+
+    <ul class="sec-fc__grid" role="list">
+      {items.map(item => (
+        <li class="fc-card">
+          <strong class="fc-card__title">{item.title}</strong>
+          <div class="fc-card__rule" aria-hidden="true"></div>
+          <p class="fc-card__desc">{item.description}</p>
+          {(item.cta1 || item.cta2) && (
+            <div class="fc-card__cta">
+              {item.cta1 && (
+                <a class="btn btn--primary" href={item.cta1.href} rel="noopener noreferrer">
+                  {item.cta1.text}
+                </a>
+              )}
+              {item.cta2 && (
+                <a class="btn btn--outline" href={item.cta2.href} rel="noopener noreferrer">
+                  {item.cta2.text}
+                </a>
+              )}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    {(cta1 || cta2) && (
+      <div class="sec-fc__cta">
+        {cta1 && (
+          <a class="btn btn--primary" href={cta1.href} rel="noopener noreferrer">
+            {cta1.text}
+          </a>
+        )}
+        {cta2 && (
+          <a class="btn btn--outline" href={cta2.href} rel="noopener noreferrer">
+            {cta2.text}
+          </a>
+        )}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+.sec-fc {
+  padding: 60px 0;
+  background-color: var(--page-bg);
+}
+.sec-fc--dark {
+  background-color: var(--main-bg);
+}
+
+/* Header */
+.sec-fc__header {
+  margin-bottom: 32px;
+}
+.sec-fc__title {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  text-align: center;
+}
+.sec-fc__body {
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.8);
+  margin: 0;
+}
+
+/* Grid — 3 columns default */
+.sec-fc__grid {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+.sec-fc--cols-3 .sec-fc__grid { grid-template-columns: repeat(3, 1fr); }
+.sec-fc--cols-2 .sec-fc__grid { grid-template-columns: repeat(2, 1fr); }
+
+/* Card */
+.fc-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 12px;
+  padding: 22px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.fc-card__title {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+/* Accent rule under title */
+.fc-card__rule {
+  width: 42px;
+  height: 3px;
+  background-color: var(--accent, #3a7d44);
+  border-radius: 2px;
+  margin: 10px 0 14px;
+  flex-shrink: 0;
+}
+
+.fc-card__desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,.72);
+  margin: 0;
+  flex: 1;
+}
+
+/* Buttons inside card */
+.fc-card__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.fc-card__cta .btn {
+  font-size: 13px;
+  padding: 8px 14px;
+}
+
+/* Section-level CTA */
+.sec-fc__cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Mobile */
+@media (max-width: 860px) {
+  .sec-fc--cols-3 .sec-fc__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .sec-fc { padding: 40px 0; }
+  .sec-fc--cols-3 .sec-fc__grid,
+  .sec-fc--cols-2 .sec-fc__grid { grid-template-columns: 1fr; }
+  .sec-fc__title { font-size: 22px; }
+}
+</style>

@@ -1,0 +1,267 @@
+/* ─── CSS Custom Properties ───────────────────────────────────────────────── */
+/* These variables are injected/replaced by the site generator.               */
+/* Default values here are fallbacks used during local development.           */
+
+@font-face {
+  font-family: "OpenSans";
+  src:
+    url("/fonts/OpenSans-Regular.woff2") format("woff2"),
+    url("/fonts/OpenSans-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenSans";
+  src:
+    url("/fonts/OpenSans-Medium.woff2") format("woff2"),
+    url("/fonts/OpenSans-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenSans";
+  src:
+    url("/fonts/OpenSans-Bold.woff2") format("woff2"),
+    url("/fonts/OpenSans-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── Typography ── */
+  --font-family: "Inter", "OpenSans", system-ui, sans-serif;
+  --font-size: 16px;
+
+  /* ── Brand palette (replaced by generator) ── */
+  --color-one: #0F172A;
+  --color-two: #FFFFFF;
+  --color-three: #6366F1;
+  --color-four: #4F46E5;
+
+  /* ── Layout ── */
+  --border-radius: 8px;
+  --box-shadow: var(--shadow-md);
+  --container-max: 1280px;
+  --container-pad: 24px;
+
+  /* ── Header ── */
+  --header-bg: #FFFFFF;
+  --header-text: #0F172A;
+
+  /* ── Main ── */
+  --main-bg: #F8FAFC;
+  --main-text: #0F172A;
+  --page-bg: #FFFFFF;
+  --page-text: #0F172A;
+
+  /* ── Footer ── */
+  --footer-bg: #0F172A;
+  --footer-text: #E2E8F0;
+
+  /* ── Buttons ── */
+  --btn-bg: #6366F1;
+  --btn-text: #FFFFFF;
+  --btn-hover-bg: #4F46E5;
+  --btn-hover-text: #FFFFFF;
+
+  /* ── Links ── */
+  --link-hover-bg: transparent;
+  --link-hover-text: #4F46E5;
+
+  /* ── Accent / Brand ── */
+  --accent: #6366F1;
+  --accent-light: #818CF8;
+  --accent-gold: #6366F1;
+
+  /* ── Display font (headings) ── */
+  --font-display: "Inter", "OpenSans", system-ui, sans-serif;
+
+  /* ── Semantic color tokens ── */
+  --color-primary: #6366F1;
+  --color-primary-hover: #4F46E5;
+  --color-bg: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+  --color-text: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
+  --color-indigo-bg: #EEF2FF;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --transition: 0.2s ease;
+
+  /* ── Shadows ── */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-indigo: 0 4px 20px rgba(99, 102, 241, 0.22);
+  --shadow-indigo-lg: 0 8px 32px rgba(99, 102, 241, 0.28);
+
+  /* ── vmedia section vars ── */
+  --v-max: 1280px;
+  --v-pad: 24px;
+  --v-gap: 20px;
+  --v-radius: 12px;
+  --v-bg: transparent;
+  --v-text: #0F172A;
+  --v-card: #FFFFFF;
+  --v-stroke: #E2E8F0;
+  --v-shadow: var(--shadow-md);
+  --v-h2: 40px;
+  --v-p: 16px;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: 1.6;
+  background-color: var(--page-bg);
+  color: var(--page-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 16px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+p {
+  margin: 0 0 12px;
+  color: var(--color-text-secondary);
+}
+
+/* ─── Utility ─────────────────────────────────────────────────────────────── */
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+  width: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wrapper > main {
+  flex: 1 1 auto;
+  background-color: var(--main-bg);
+  color: var(--main-text);
+  padding-top: 72px; /* offset for fixed header */
+}
+
+/* ─── Buttons ─────────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  box-shadow: var(--shadow-indigo);
+}
+.btn--primary:hover {
+  background: var(--btn-hover-bg);
+  color: var(--btn-hover-text);
+  box-shadow: var(--shadow-indigo-lg);
+  transform: translateY(-1px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-border-strong);
+}
+.btn--outline:hover {
+  background: var(--color-indigo-bg);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1.5px solid var(--color-border);
+}
+.btn--ghost:hover {
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+.btn--gold {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  box-shadow: var(--shadow-indigo);
+}
+.btn--gold:hover {
+  background: var(--btn-hover-bg);
+  box-shadow: var(--shadow-indigo-lg);
+  transform: translateY(-1px);
+}
+
+/* ─── Section animations ─────────────────────────────────────────────────── */
+
+.page > section:not(.intro-banner) {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+.page > section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Scroll observer (JS injects .visible) ─────────────────────────────── */

@@ -1,0 +1,29 @@
+---
+/**
+ * src/components/SeoOGHome.astro
+ * OG meta tags component for the Home page
+ */
+
+import SeoOG from './SeoOG.astro';
+import homeEn from '../locales/pages/home/en.json';
+
+interface Props {
+  lang?: 'en' | 'ru';
+}
+
+const { lang = 'en' } = Astro.props;
+
+// Load appropriate locale
+const locale = lang === 'en' ? homeEn : (await import('../locales/pages/home/ru.json')).default;
+
+const title = locale.meta?.title || 'Home';
+const description = locale.meta?.description || '';
+const url = `${import.meta.env.PUBLIC_DOMAIN}/`;
+---
+
+<SeoOG
+  page="home"
+  title={title}
+  description={description}
+  url={url}
+/>

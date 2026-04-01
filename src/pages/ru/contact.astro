@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import ContactPremium from '../../components/ContactPremium.astro';
+import Footer from '../../components/Footer.astro';
+import footerCommon from '../../locales/common/ru.json';
+import SeoOGPage from '../../components/seo/SeoOGPage.astro';
+import SeoSchemaPage from '../../components/seo/SeoSchemaPage.astro';
+
+const lang = 'ru';
+const slug = 'contact';
+const locale = (await import('../../locales/pages/contact/ru.json')).default;
+const { meta, hero } = locale;
+
+const ref = import.meta.env.PUBLIC_REF ?? '#';
+---
+
+<BaseLayout title={meta.title} description={meta.description} slug={slug} lang={lang}>
+  <Fragment slot="head">
+    <SeoOGPage lang={lang} slug={slug} title={meta.title} description={meta.description} />
+    <SeoSchemaPage lang={lang} slug={slug} title={meta.title} description={meta.description} />
+  </Fragment>
+  <Header currentPage={slug} lang={lang} slug={slug} />
+  <HeroSection
+    lang={lang}
+    title={hero.title}
+    description={hero.description}
+    tags={hero.tags}
+    ctaText={hero.cta}
+    ctaHref={ref}
+    topButtons={hero.topButtons}
+    bgSrc={hero.img}
+  />
+  <ContactPremium
+    intro={locale.intro}
+    teaser={locale.teaser}
+    showcase={locale.showcase}
+    form={locale.form}
+  />
+  <Footer data={footerCommon.footerData} />
+</BaseLayout>

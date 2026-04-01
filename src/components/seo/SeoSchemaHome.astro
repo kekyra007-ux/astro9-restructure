@@ -1,0 +1,24 @@
+---
+/**
+ * src/components/seo/SeoSchemaHome.astro
+ * JSON-LD schema for the Home page
+ */
+import SeoSchema from './SeoSchema.astro';
+import homeEn from '../../locales/pages/home/en.json';
+
+interface Props { lang?: 'en' | 'ru'; }
+const { lang = 'en' } = Astro.props;
+
+const locale      = lang === 'en' ? homeEn : (await import('../../locales/pages/home/ru.json')).default;
+const pageName    = locale.meta?.title || 'Home';
+const pageDesc    = locale.meta?.description || '';
+const pageUrl     = `${import.meta.env.PUBLIC_DOMAIN}/`;
+---
+
+<SeoSchema
+  slug="home"
+  pageName={pageName}
+  pageDescription={pageDesc}
+  pageUrl={pageUrl}
+  imagePath="/img/og.jpg"
+/>

@@ -1,0 +1,133 @@
+---
+/**
+ * ContactButton.astro — Sticky full-width bottom bar with shimmer animation.
+ * Fixed at the very bottom of the viewport, always visible while scrolling.
+ */
+
+import { ENV } from '../utils/env';
+import commonEn from '../locales/common/en.json';
+
+const s = commonEn.social;
+const href =
+  s.whatsapp  ||
+  s.telegram  ||
+  s.email     ||
+  (ENV.EMAIL ? `mailto:${ENV.EMAIL}` : ENV.REF || '#');
+
+const label = commonEn.contactBar;
+---
+
+<a
+  class="contact-bar"
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Share Northlane Studio"
+>
+  <span class="contact-bar__shimmer" aria-hidden="true"></span>
+  <span class="contact-bar__inner">
+    <span class="contact-bar__icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+      </svg>
+    </span>
+    <span class="contact-bar__text">{label}</span>
+  </span>
+</a>
+
+<style>
+/* Clean sticky CTA bar — minimal SaaS style */
+.contact-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 990;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  background: #6366F1;
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 -1px 0 rgba(99,102,241,0.2), 0 -4px 20px rgba(99,102,241,0.15);
+  transition: background 0.18s ease;
+}
+
+.contact-bar:hover {
+  background: #4F46E5;
+}
+
+/* Subtle shimmer sweep — very light */
+.contact-bar__shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 80%
+  );
+  background-size: 200% 100%;
+  animation: bar-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes bar-sweep {
+  0%   { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.contact-bar__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-bar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.contact-bar__text {
+  font-family: var(--font-family, "OpenSans", sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+/* Push page content up so bar doesn't overlap footer */
+:global(body) {
+  padding-bottom: 48px;
+}
+
+@media (max-width: 480px) {
+  .contact-bar {
+    height: 44px;
+  }
+
+  .contact-bar__text {
+    font-size: 12px;
+  }
+
+  .contact-bar__icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  :global(body) {
+    padding-bottom: 44px;
+  }
+}
+</style>

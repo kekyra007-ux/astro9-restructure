@@ -1,0 +1,584 @@
+---
+/**
+ * Header.astro — Fixed top navigation bar for OKABC.PH
+ *
+ * Props:
+ *   currentPage  string  — active nav slug for aria-current
+ *   lang         string  — current language code ('en' | 'ru')
+ *   slug         string  — current page slug for alternate-lang links
+ */
+
+import { buildPath, type Lang } from '../i18n/utils';
+
+interface Props {
+  currentPage?: string;
+  lang?:        Lang;
+  slug?:        string;
+}
+
+const { currentPage = '', lang = 'en', slug = '' } = Astro.props;
+
+const brand  = import.meta.env.PUBLIC_BRAND  ?? 'OKABC.PH';
+const ref    = import.meta.env.PUBLIC_REF    ?? '#';
+const app    = import.meta.env.PUBLIC_APP    ?? ref;
+
+const navLinks = [
+  { label: 'Home',     href: buildPath(lang, ''),         slug: 'home',     icon: 'home' },
+  { label: 'About',    href: buildPath(lang, 'about'),    slug: 'about',    icon: 'about' },
+  { label: 'Features', href: buildPath(lang, 'features'), slug: 'features', icon: 'features' },
+  { label: 'Products', href: buildPath(lang, 'products'), slug: 'products', icon: 'products' },
+  { label: 'Contact',  href: buildPath(lang, 'contact'),  slug: 'contact',  icon: 'contact' },
+];
+
+const enHref = buildPath('en', slug);
+const ruHref = buildPath('ru', slug);
+---
+
+<header class="header">
+  <div class="header__container">
+    
+    <!-- Logo -->
+    <a class="header__logo" href={buildPath(lang, '')} aria-label={brand}>
+      <img
+        class="header__logo-img"
+        src="/img/logo.png"
+        alt={brand}
+        width="140"
+        height="40"
+      />
+    </a>
+
+    <!-- Burger (mobile) -->
+    <button
+      class="header__burger"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="main-nav"
+      id="burger-btn"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Nav -->
+    <nav class="header__nav" id="main-nav" role="navigation">
+      <ul class="header__nav-list" role="list">
+        {navLinks.map(({ label, href, slug: s, icon }) => (
+          <li class="header__nav-item">
+            <a
+              class="header__nav-link"
+              href={href}
+              aria-current={currentPage === s ? 'page' : undefined}
+              title={label}
+            >
+              <span class="header__nav-icon">
+                {icon === 'home'     && '🏠'}
+                {icon === 'about'    && '💡'}
+                {icon === 'features' && '⚡'}
+                {icon === 'products' && '📦'}
+                {icon === 'contact'  && '✉️'}
+              </span>
+              <span class="header__nav-label">{label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Right section: Language switcher + License button -->
+    <div class="header__right">
+      <!-- Language switcher -->
+      <div class="header__lang-switcher" role="navigation" aria-label="Language">
+        <a
+          class:list={['header__lang-btn', { 'header__lang-btn--active': lang === 'ru' }]}
+          href={ruHref}
+          aria-label="Russian"
+          title="RU"
+        >
+          RU
+        </a>
+        <a
+          class:list={['header__lang-btn', { 'header__lang-btn--active': lang === 'en' }]}
+          href={enHref}
+          aria-label="English"
+          title="EN"
+        >
+          EN
+        </a>
+      </div>
+
+
+
+ 
+    </div>
+
+  </div>
+</header>
+
+<style>
+/* ── Header shell ── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  background: #0F172A;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #0F172A;
+  z-index: 100;
+  box-shadow: 0 1px 0 #E2E8F0;
+  border-bottom: none;
+}
+
+.header__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* ── Logo ── */
+.header__logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.header__logo:hover {
+  transform: scale(1.05);
+}
+
+.header__logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── Nav links ── */
+.header__nav-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  justify-content: center;
+}
+
+.header__nav-item {
+  display: flex;
+}
+
+.header__nav-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.18s ease;
+  color: #f4f9ff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header__nav-link:hover {
+  background-color: #F1F5F9;
+  color: #0F172A;
+}
+
+.header__nav-link[aria-current="page"] {
+  background-color: #EEF2FF;
+  color: #6366F1;
+  font-weight: 600;
+}
+
+.header__nav-icon {
+  font-size: 16px;
+  display: inline-block;
+}
+
+.header__nav-label {
+  display: inline;
+}
+
+/* ── Right section ── */
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Language switcher ── */
+.header__lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: #F1F5F9;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+}
+
+.header__lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  color: #64748B;
+  background: transparent;
+  border: none;
+}
+
+.header__lang-btn:hover {
+  background: #FFFFFF;
+  color: #0F172A;
+}
+
+.header__lang-btn--active {
+  background: #FFFFFF;
+  color: #6366F1;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* ── License button ── */
+.header__license-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  color: #6366F1;
+  background: #EEF2FF;
+  border: 1.5px solid #C7D2FE;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.header__license-btn:hover {
+  background: #6366F1;
+  color: #FFFFFF;
+  border-color: #6366F1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99,102,241,0.25);
+}
+
+/* ── Burger (hidden on desktop) ── */
+.header__burger {
+  display: none;
+}
+
+/* ─────────────────────────────────────────────────────── TABLET ─── */
+@media (max-width: 1024px) {
+  .header__container {
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .header__nav-link {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+  .header__nav-label {
+    display: none;
+  }
+
+  .header__nav-icon {
+    font-size: 17px;
+  }
+
+  .header__license-btn {
+    padding: 0 12px;
+    font-size: 11px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────── MOBILE ─── */
+@media (max-width: 768px) {
+  .header__container {
+    height: 60px;
+    gap: 12px;
+    padding: 0 16px;
+  }
+
+  /* On mobile: logo left, burger far right */
+  .header__nav {
+    order: 4;
+  }
+
+  .header__right {
+    display: none;
+  }
+
+  .header__burger {
+    order: 3;
+    margin-left: auto;
+  }
+
+  /* Burger button */
+  .header__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 22px;
+    height: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 200;
+  }
+
+  .header__burger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #475569;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+  }
+
+  .header__burger.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .header__burger.is-open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .header__burger.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile nav overlay */
+  .header__nav {
+    position: fixed;
+    inset: 0;
+    top: -100vh;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    z-index: 150;
+    transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    padding: 80px 24px 40px;
+  }
+
+  .header__nav.is-open {
+    top: 0;
+  }
+
+  .header__nav-list {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .header__nav-item {
+    width: 100%;
+  }
+
+  .header__nav-link {
+    width: 100%;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 13px 16px;
+    background: #F8FAFC;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 8px;
+    color: #0F172A;
+  }
+
+  .header__nav-link:hover,
+  .header__nav-link[aria-current="page"] {
+    background: #EEF2FF;
+    border-color: #C7D2FE;
+    color: #6366F1;
+  }
+
+  .header__nav-label {
+    display: inline;
+  }
+
+  .header__nav-icon {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header__container {
+    padding: 0 12px;
+  }
+}
+
+/* ── License Modal ── */
+.license-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.license-modal.is-open {
+  display: flex;
+}
+
+.license-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.license-modal__box {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 28px 24px 24px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(99, 102, 241, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: license-in 0.25s ease;
+}
+
+@keyframes license-in {
+  from { opacity: 0; transform: scale(0.93) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.license-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: #F1F5F9;
+  border: none;
+  color: #64748B;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.license-modal__close:hover {
+  background: #EEF2FF;
+  color: #6366F1;
+}
+
+.license-modal__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94A3B8;
+  margin: 0;
+  text-align: center;
+}
+
+.license-modal__img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  border: 1px solid #E2E8F0;
+}
+
+@media (max-width: 540px) {
+  .license-modal__box {
+    padding: 20px 16px 16px;
+    border-radius: 12px;
+  }
+}
+</style>
+
+<script>
+  const burger = document.getElementById('burger-btn');
+  const nav = document.getElementById('main-nav');
+
+  burger?.addEventListener('click', () => {
+    const expanded = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!expanded));
+    burger.classList.toggle('is-open');
+    nav?.classList.toggle('is-open');
+    document.body.style.overflow = expanded ? '' : 'hidden';
+  });
+
+  nav?.querySelectorAll('.header__nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      burger?.classList.remove('is-open');
+      nav?.classList.remove('is-open');
+      burger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // License modal
+  const licenseBtn      = document.getElementById('license-btn');
+  const licenseModal    = document.getElementById('license-modal');
+  const licenseClose    = document.getElementById('license-close');
+  const licenseBackdrop = document.getElementById('license-backdrop');
+
+  function openLicense() {
+    licenseModal?.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLicense() {
+    licenseModal?.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  licenseBtn?.addEventListener('click', openLicense);
+  licenseClose?.addEventListener('click', closeLicense);
+  licenseBackdrop?.addEventListener('click', closeLicense);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLicense();
+  });
+</script>

@@ -1,0 +1,13 @@
+---
+import { getLangFromUrl, getSlugFromUrl } from '../i18n/utils';
+import Layout from '../layouts/BaseLayout.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const slug = 'products';
+---
+
+<Layout title="Gaming" description="Gaming" slug={slug}>
+  <main>
+    <h1>Gaming</h1>
+  </main>
+</Layout>

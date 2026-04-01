@@ -1,0 +1,103 @@
+---
+/**
+ * src/components/ReviewCard.astro
+ * Displays a single user review card.
+ */
+
+interface Props {
+  author: string;
+  rating: number; // 1–5
+  date?: string;
+  text: string;
+  avatar?: string;
+}
+
+const { author, rating, date, text, avatar } = Astro.props;
+const stars = Array.from({ length: 5 }, (_, i) => i < rating);
+const initials = author
+  .split(" ")
+  .map((n) => n[0])
+  .join("")
+  .toUpperCase()
+  .slice(0, 2);
+---
+
+<article class="review-card card">
+  <div class="review-header">
+    <div class="review-avatar" aria-hidden="true">
+      {avatar
+        ? <img src={avatar} alt={author} width="40" height="40" />
+        : <span>{initials}</span>
+      }
+    </div>
+
+    <div class="review-meta">
+      <p class="review-author">{author}</p>
+      {date && <time class="review-date">{date}</time>}
+    </div>
+
+    <div class="review-stars" aria-label={`Rating: ${rating} out of 5`}>
+      {stars.map((filled) => (
+        <svg
+          class={`star ${filled ? "star--filled" : "star--empty"}`}
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill={filled ? "currentColor" : "none"}
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+        >
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      ))}
+    </div>
+  </div>
+
+  <p class="review-text">{text}</p>
+</article>
+
+<style>
+  .review-card { display: flex; flex-direction: column; gap: 1rem; }
+
+  .review-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .review-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #0F172A;
+    overflow: hidden;
+  }
+  .review-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  .review-meta { flex: 1; }
+  .review-author { font-weight: 600; font-size: 0.9rem; line-height: 1.2; }
+  .review-date { color: var(--color-muted); font-size: 0.78rem; }
+
+  .review-stars {
+    display: flex;
+    gap: 2px;
+    margin-left: auto;
+    padding-top: 2px;
+  }
+  .star--filled { color: var(--color-primary); }
+  .star--empty  { color: var(--color-border); }
+
+  .review-text {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+</style>

@@ -1,0 +1,236 @@
+---
+/**
+ * src/components/SeoSchema.astro
+ * Generates structured data (JSON-LD) for SEO purposes.
+ * Supports multiple page types: WebPage, CollectionPage, MobileApplication, HowTo, etc.
+ */
+
+import { ENV } from '../utils/env';
+
+interface Props {
+  page: 'home' | 'casino' | 'betting' | 'app' | 'login' | 'games';
+  pageName: string;
+  pageDescription: string;
+  pageUrl: string;
+  imagePath?: string;
+}
+
+const {
+  page,
+  pageName,
+  pageDescription,
+  pageUrl,
+  imagePath = '/img/og.jpg',
+} = Astro.props;
+
+const baseUrl = ENV.DOMAIN;
+const brandName = ENV.BRAND || 'Brand';
+const countryName = 'Bangladesh';
+const countryCode = 'BD';
+const currencyCode = 'BDT';
+const city = 'Dhaka';
+const postalCode = '1000';
+const htmlLang = 'en-BD';
+
+// Page configuration
+const PAGE_CONFIG: Record<string, any> = {
+  home: {
+    pageType: 'WebPage',
+    breadcrumb: 'Home',
+    path: '/',
+  },
+  casino: {
+    pageType: 'CollectionPage',
+    breadcrumb: 'Casino',
+    path: '/casino',
+    catalogName: 'Casino Categories',
+    catalogItems: [
+      { name: 'Live Casino', path: '/casino#live' },
+      { name: 'Slots', path: '/casino#slots' },
+      { name: 'Jackpots', path: '/casino#jackpots' },
+      { name: 'Table Games', path: '/casino#table-games' },
+    ],
+  },
+  games: {
+    pageType: 'CollectionPage',
+    breadcrumb: 'Games',
+    path: '/games',
+    catalogName: 'Game Categories',
+    catalogItems: [
+      { name: 'Slots', path: '/games#slots' },
+      { name: 'Live Casino', path: '/games#live' },
+      { name: 'Jackpots', path: '/games#jackpots' },
+      { name: 'Arcade Games', path: '/games#arcade' },
+    ],
+  },
+  betting: {
+    pageType: 'CollectionPage',
+    breadcrumb: 'Betting',
+    path: '/betting',
+    catalogName: 'Betting Categories',
+    catalogItems: [
+      { name: 'Football', path: '/betting#football' },
+      { name: 'Cricket', path: '/betting#cricket' },
+      { name: 'Basketball', path: '/betting#basketball' },
+      { name: 'Tennis', path: '/betting#tennis' },
+    ],
+  },
+  app: {
+    pageType: 'WebPage',
+    breadcrumb: 'App',
+    path: '/app',
+    mobileApp: true,
+  },
+  login: {
+    pageType: 'WebPage',
+    breadcrumb: 'Login',
+    path: '/login',
+    howTo: true,
+  },
+};
+
+const cfg = PAGE_CONFIG[page];
+const pageAnchorBase = page === 'home' ? baseUrl : pageUrl;
+const siteDisplayName = `${brandName} ${countryName}`;
+
+// Build schema graph
+const graph: any[] = [
+  {
+    '@type': 'Organization',
+    '@id': `${baseUrl}/#organization`,
+    name: brandName,
+    url: `${baseUrl}/`,
+    logo: `${baseUrl}/img/logo_mini.webp`,
+    sameAs: [],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Online Service',
+      addressLocality: city,
+      postalCode,
+      addressCountry: countryCode,
+    },
+  },
+  {
+    '@type': 'WebSite',
+    '@id': `${baseUrl}/#website`,
+    url: `${baseUrl}/`,
+    name: siteDisplayName,
+    publisher: {
+      '@id': `${baseUrl}/#organization`,
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${baseUrl}/search?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@type': cfg.pageType,
+    '@id': `${pageAnchorBase}/#webpage`,
+    url: pageUrl,
+    name: pageName,
+    inLanguage: htmlLang,
+    isPartOf: {
+      '@id': `${baseUrl}/#website`,
+    },
+    about: {
+      '@id': `${baseUrl}/#organization`,
+    },
+    description: pageDescription,
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      url: `${baseUrl}${imagePath}`,
+    },
+  },
+];
+
+// Add catalog if applicable
+if (cfg.catalogItems) {
+  graph.push({
+    '@type': 'OfferCatalog',
+    '@id': `${pageAnchorBase}/#catalog`,
+    name: cfg.catalogName,
+    itemListElement: cfg.catalogItems.map((item: any) => ({
+      '@type': 'OfferCatalog',
+      name: item.name,
+      url: `${baseUrl}${item.path}`,
+    })),
+  });
+}
+
+// Add mobile app schema if applicable
+if (cfg.mobileApp) {
+  graph.push({
+    '@type': 'MobileApplication',
+    '@id': `${pageAnchorBase}/#mobile-app`,
+    name: pageName,
+    operatingSystem: 'Android',
+    applicationCategory: 'GameApplication',
+    downloadUrl: `${baseUrl}/BRAND_APP.apk`,
+    installUrl: pageUrl,
+    offers: {
+      '@type': 'Offer',
+      price: '0.00',
+      priceCurrency: currencyCode,
+    },
+  });
+}
+
+// Add how-to schema if applicable
+if (cfg.howTo) {
+  graph.push({
+    '@type': 'HowTo',
+    '@id': `${pageAnchorBase}/#howto`,
+    name: `How to log into ${brandName}`,
+    description: pageDescription,
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Open the login page',
+        text: `Go to ${pageUrl}.`,
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Enter your details',
+        text: 'Use your registered credentials.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Sign in',
+        text: 'Submit the form to access your account.',
+      },
+    ],
+  });
+}
+
+// Add breadcrumb
+graph.push({
+  '@type': 'BreadcrumbList',
+  '@id': `${pageAnchorBase}/#breadcrumb`,
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${baseUrl}/`,
+    },
+    ...(page !== 'home'
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: cfg.breadcrumb,
+            item: pageUrl,
+          },
+        ]
+      : []),
+  ],
+});
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@graph': graph,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

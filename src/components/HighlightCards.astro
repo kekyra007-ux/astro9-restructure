@@ -1,0 +1,408 @@
+---
+interface BonusCard {
+  label: string;
+  heading: string;
+  description: string;
+  items: string[];
+  cta: string;
+  color: 'orange' | 'red' | 'purple' | 'teal' | 'blue' | 'gold';
+}
+
+interface Props {
+  cards: BonusCard[];
+  ctaHref: string;
+}
+
+const { cards, ctaHref } = Astro.props;
+
+const themes: Record<string, {
+  accent: string;
+  soft: string;
+  softStrong: string;
+  border: string;
+}> = {
+  orange: {
+    accent: '#D97706',
+    soft: 'linear-gradient(180deg, rgba(217,119,6,0.08) 0%, rgba(217,119,6,0.02) 100%)',
+    softStrong: 'rgba(217,119,6,0.12)',
+    border: 'rgba(217,119,6,0.18)',
+  },
+  red: {
+    accent: '#DC2626',
+    soft: 'linear-gradient(180deg, rgba(220,38,38,0.08) 0%, rgba(220,38,38,0.02) 100%)',
+    softStrong: 'rgba(220,38,38,0.12)',
+    border: 'rgba(220,38,38,0.18)',
+  },
+  purple: {
+    accent: '#7C3AED',
+    soft: 'linear-gradient(180deg, rgba(124,58,237,0.08) 0%, rgba(124,58,237,0.02) 100%)',
+    softStrong: 'rgba(124,58,237,0.12)',
+    border: 'rgba(124,58,237,0.18)',
+  },
+  teal: {
+    accent: '#0F766E',
+    soft: 'linear-gradient(180deg, rgba(15,118,110,0.08) 0%, rgba(15,118,110,0.02) 100%)',
+    softStrong: 'rgba(15,118,110,0.12)',
+    border: 'rgba(15,118,110,0.18)',
+  },
+  blue: {
+    accent: '#2563EB',
+    soft: 'linear-gradient(180deg, rgba(37,99,235,0.08) 0%, rgba(37,99,235,0.02) 100%)',
+    softStrong: 'rgba(37,99,235,0.12)',
+    border: 'rgba(37,99,235,0.18)',
+  },
+  gold: {
+    accent: '#4F46E5',
+    soft: 'linear-gradient(180deg, rgba(79,70,229,0.08) 0%, rgba(79,70,229,0.02) 100%)',
+    softStrong: 'rgba(79,70,229,0.12)',
+    border: 'rgba(79,70,229,0.18)',
+  },
+};
+---
+
+<section class="bonus-cards">
+  <div class="bonus-cards__inner">
+    <div class="bonus-cards__grid">
+      {cards.map((card, index) => (
+        <article
+          class={`bonus-cards__card ${index === 1 ? 'bonus-cards__card--featured' : ''}`}
+          style={`
+            --card-accent: ${themes[card.color].accent};
+            --card-bg: ${themes[card.color].soft};
+            --card-soft: ${themes[card.color].softStrong};
+            --card-border: ${themes[card.color].border};
+          `}
+        >
+          <div class="bonus-cards__accent"></div>
+
+          <div class="bonus-cards__top">
+            <div class="bonus-cards__eyebrow-row">
+              <p class="bonus-cards__label">{card.label}</p>
+              {index === 1 && <span class="bonus-cards__badge">Popular</span>}
+            </div>
+
+            <h3 class="bonus-cards__heading">{card.heading}</h3>
+            <p class="bonus-cards__desc">{card.description}</p>
+          </div>
+
+          <div class="bonus-cards__meta">
+            <div class="bonus-cards__meta-item">
+              <span class="bonus-cards__meta-dot"></span>
+              <span>{card.items.length} included features</span>
+            </div>
+          </div>
+
+          <ul class="bonus-cards__list">
+            {card.items.map((item) => (
+              <li class="bonus-cards__item">
+                <span class="bonus-cards__check" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M4.5 10.5L8 14L15.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="bonus-cards__footer">
+            <a href={ctaHref} class="bonus-cards__cta">
+              <span>{card.cta}</span>
+              <svg class="bonus-cards__cta-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 15L15 5M15 5H7.5M15 5V12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+
+
+  .bonus-cards {
+    background: var(--color-bg);
+    padding: 5rem 0;
+  }
+
+  .bonus-cards__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+  }
+
+
+  .bonus-cards__grid {
+    display: grid;
+  grid-template-columns: repeat(3, 480px);
+    justify-content: center;
+    gap: 1.75rem;
+    align-items: stretch;
+  }
+
+  .bonus-cards__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 1.75rem;
+    border-radius: 26px;
+    background:
+      var(--card-bg),
+      rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--card-border);
+    box-shadow:
+      0 12px 30px rgba(15, 23, 42, 0.05),
+      0 1px 0 rgba(255, 255, 255, 0.72) inset;
+    overflow: hidden;
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition),
+      border-color var(--transition);
+    backdrop-filter: blur(10px);
+  }
+
+  .bonus-cards__card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 18px 40px rgba(15, 23, 42, 0.08),
+      0 1px 0 rgba(255, 255, 255, 0.84) inset;
+    border-color: color-mix(in srgb, var(--card-accent) 28%, rgba(15, 23, 42, 0.08));
+  }
+
+  .bonus-cards__card--featured {
+    box-shadow:
+      0 18px 44px rgba(15, 23, 42, 0.09),
+      0 1px 0 rgba(255, 255, 255, 0.86) inset;
+  }
+
+  .bonus-cards__accent {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      var(--card-accent) 0%,
+      color-mix(in srgb, var(--card-accent) 62%, white) 100%
+    );
+  }
+
+  .bonus-cards__top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
+  }
+
+  .bonus-cards__eyebrow-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    min-height: 2rem;
+  }
+
+  .bonus-cards__label,
+  .bonus-cards__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    padding: 0.4rem 0.78rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .bonus-cards__label {
+    margin: 0;
+    background: var(--card-soft);
+    color: var(--card-accent);
+  }
+
+  .bonus-cards__badge {
+    background: #111827;
+    color: #fff;
+  }
+
+  .bonus-cards__heading {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.16rem, 1rem + 0.55vw, 1.4rem);
+    font-weight: 800;
+    line-height: 1.14;
+    letter-spacing: -0.025em;
+    color: var(--color-title);
+    text-wrap: balance;
+  }
+
+  .bonus-cards__desc {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.62;
+    color: var(--color-text);
+    max-width: 36ch;
+  }
+
+  .bonus-cards__meta {
+    margin-top: 1.35rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .bonus-cards__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 1.25rem;
+    font-size: 0.81rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: color-mix(in srgb, var(--color-text) 80%, white);
+  }
+
+  .bonus-cards__meta-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--card-accent);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--card-accent) 14%, transparent);
+    flex-shrink: 0;
+  }
+
+  .bonus-cards__list {
+    list-style: none;
+    padding: 0;
+    margin: 1.35rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.82rem;
+    flex: 1;
+  }
+
+  .bonus-cards__item {
+    display: grid;
+    grid-template-columns: 1.3rem 1fr;
+    align-items: start;
+    column-gap: 0.78rem;
+    font-size: 0.93rem;
+    line-height: 1.55;
+    color: var(--color-text);
+  }
+
+  .bonus-cards__check {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-top: 0.08rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-soft);
+    color: var(--card-accent);
+    flex-shrink: 0;
+  }
+
+  .bonus-cards__check svg {
+    width: 0.82rem;
+    height: 0.82rem;
+  }
+
+  .bonus-cards__footer {
+    margin-top: 1.6rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .bonus-cards__cta {
+    width: 100%;
+    min-height: 3.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.9rem 1.15rem;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--card-accent) 90%, white) 0%,
+      var(--card-accent) 100%
+    );
+    box-shadow:
+      0 10px 20px color-mix(in srgb, var(--card-accent) 18%, transparent),
+      0 1px 0 rgba(255, 255, 255, 0.24) inset;
+    transition:
+      transform var(--transition),
+      filter var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .bonus-cards__cta:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow:
+      0 14px 26px color-mix(in srgb, var(--card-accent) 22%, transparent),
+      0 1px 0 rgba(255, 255, 255, 0.28) inset;
+  }
+
+  .bonus-cards__cta-icon {
+    width: 0.95rem;
+    height: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1279px) {
+    .bonus-cards__inner {
+      max-width: 980px;
+    }
+
+    .bonus-cards__grid {
+      grid-template-columns: repeat(2, minmax(0, 380px));
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .bonus-cards {
+      padding: 4rem 0;
+    }
+
+    .bonus-cards__inner {
+      max-width: 100%;
+    }
+
+    .bonus-cards__grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .bonus-cards__card {
+      padding: 1.35rem;
+      border-radius: 22px;
+    }
+
+    .bonus-cards__heading {
+      font-size: 1.28rem;
+    }
+
+    .bonus-cards__desc,
+    .bonus-cards__item {
+      font-size: 0.92rem;
+    }
+
+    .bonus-cards__footer {
+      margin-top: 1.35rem;
+      padding-top: 1rem;
+    }
+  }
+</style>

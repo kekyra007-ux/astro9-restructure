@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "About Northlane Studio - Digital Product Studio | Bilingual Company Website",
+    "description": "Learn more about Northlane Studio, a digital product studio creating bilingual company websites, scalable interfaces, and modern digital systems for growing businesses.",
+    "keywords": "about northlane studio, digital product studio, bilingual company website, web design studio, product team"
+  },
+  "hero": {
+    "title": "ABOUT NORTHLANE STUDIO — DIGITAL PRODUCT PARTNER FOR MODERN BUSINESSES",
+    "description": "Northlane Studio helps companies build a clearer and more professional digital presence. We create bilingual company websites, scalable interfaces, and structured product experiences that work across English and Russian audiences on desktop and mobile.",
+    "tags": [
+      "about northlane studio",
+      "digital product partner",
+      "bilingual website team",
+      "modern studio approach"
+    ],
+    "topButtons": [
+      { "icon": "🔗", "label": "Digital product expertise" },
+      { "icon": "✅", "label": "Structured delivery approach" },
+      { "icon": "📱", "label": "Responsive web experiences" },
+      { "icon": "🎮", "label": "Bilingual company focus" }
+    ],
+    "cta": "DISCOVER NORTHLANE STUDIO",
+    "img": "/img/banner-bg.avif"
+  },
+
+  "linkArticle": {
+    "title": "Who We Are and How Northlane Studio Works",
+    "cards": [
+      { "title": "Strategic", "subtitle": "DIGITAL PRODUCT THINKING" },
+      { "title": "Bilingual", "subtitle": "ENGLISH AND RUSSIAN READY" },
+      { "title": "Scalable", "subtitle": "REUSABLE WEBSITE SYSTEMS" },
+      { "title": "Modern", "subtitle": "BUSINESS-FOCUSED EXECUTION" }
+    ],
+    "para1": "Northlane Studio was created for companies that need more than a visually attractive website. We focus on building digital foundations that explain the business clearly, position services with confidence, and create a more coherent path from first impression to client enquiry. Our approach combines product thinking, visual structure, and content clarity so that every page supports the brand instead of simply filling space.",
+    "para2": "We work especially well for businesses that need a bilingual company website in English and Russian. Many teams struggle to keep two language versions aligned while preserving one brand identity. Northlane Studio solves that by treating structure, hierarchy, and messaging as one system. Instead of building disconnected pages, we create reusable layouts and scalable content patterns that stay consistent as the website grows.",
+    "blockquote": "Northlane Studio builds bilingual digital experiences with clear structure, modern presentation, and product-minded execution.",
+    "para3": "Our work is guided by practical business goals: make the company easier to understand, improve presentation quality, and create a digital presence that feels more trustworthy and mature. Whether the project is a service website, a product showcase, or a broader studio platform, we aim to deliver systems that are easier to maintain, easier to expand, and stronger in front of clients, partners, and internal teams.",
+    "bullets": [
+      "A digital product studio focused on clarity, structure, and scalable presentation",
+      "Bilingual website systems for English and Russian company communication",
+      "Reusable layouts and content patterns that support long-term growth",
+      "A modern execution model built for studios, agencies, SaaS teams, and B2B brands"
+    ],
+    "ctas": [
+      { "label": "MEET NORTHLANE STUDIO", "primary": true },
+      { "label": "VIEW OUR APPROACH", "primary": false },
+      { "label": "START A PROJECT", "primary": false }
+    ]
+  },
+
+  "disclaimer": "This About page content is intended for a professional digital product studio and bilingual company website. Replace demo messaging with your final company story before launch."
+}

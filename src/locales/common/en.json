@@ -1,0 +1,43 @@
+{
+  "buttons": {
+    "download": "VIEW SERVICES",
+    "login": "BOOK A CALL",
+    "claim": "START A PROJECT"
+  },
+  "disclaimer": "Please note that this website is intended for business enquiries, service discovery, and professional communication only.",
+  "contactBar": "SHARE NORTHLANE STUDIO",
+  "social": {
+    "email": "",
+    "twitter": "",
+    "facebook": "",
+    "instagram": "",
+    "telegram": "",
+    "whatsapp": ""
+  },
+  "footerData": {
+    "columns": [
+      {
+        "title": "NORTHLANE STUDIO",
+        "description": "Northlane Studio is a digital product studio focused on bilingual company websites, scalable interfaces, and modern web experiences for growing businesses."
+      },
+      {
+        "title": "SITE LINKS",
+        "description": "Home · About · Features · Products · Pricing · Contact · English / Russian website structure"
+      },
+      {
+        "title": "WORK APPROACH",
+        "description": "We build with clarity, structure, and long-term scalability in mind. Every project is designed to support stronger presentation, better communication, and sustainable digital growth."
+      }
+    ],
+    "socialLinks": [
+      { "src": "/img/facebook.svg", "alt": "Facebook" },
+      { "src": "/img/insta.svg", "alt": "Instagram" },
+      { "src": "/img/tg.svg", "alt": "Telegram" },
+      { "src": "/img/email.svg", "alt": "Email" }
+    ],
+    "calloutTitle": "READY TO BUILD A STRONGER DIGITAL PRESENCE?",
+    "calloutDescription": "Partner with Northlane Studio to create a bilingual company website with clear structure, modern presentation, and scalable product thinking.",
+    "calloutCta": "START YOUR PROJECT",
+    "copyrightText": "© 2025 Northlane Studio. All rights reserved. Digital product studio for bilingual company websites and modern web experiences."
+  }
+}

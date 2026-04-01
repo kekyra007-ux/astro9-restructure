@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "OKABCPH Access — Official Direct Entry Philippines | Verified Route",
+    "description": "Get direct access to OKABCPH Philippines. Verified official entry point, no redirects. PAGCOR licensed platform. Secure and instant access for Pinoy users.",
+    "keywords": "okabcph access, okabcph direct entry, okabcph Philippines, verified access, PAGCOR licensed"
+  },
+  "hero": {
+    "title": "OKABCPH ACCESS — OFFICIAL DIRECT ENTRY PHILIPPINES",
+    "description": "Access OKABCPH through the verified official entry point. Secure connection, instant access, no unnecessary redirects. Your trusted route to the PAGCOR licensed Philippines platform — working 24/7 on mobile and desktop.",
+    "tags": [
+      "okabcph access",
+      "direct entry link",
+      "verified route Philippines",
+      "secure access link"
+    ],
+    "topButtons": [
+      { "icon": "🔗", "label": "okabcph official link" },
+      { "icon": "✅", "label": "Verified website route" },
+      { "icon": "📱", "label": "okabcph app link" },
+      { "icon": "🎮", "label": "Philippines access 24/7" }
+    ],
+    "cta": "ACCESS OKABCPH NOW",
+    "img": "/img/banner-bg.avif"
+  },
+
+  "intro": {
+    "eyebrow": "Contact Northlane Studio",
+    "heading": "Let’s build a clearer digital presence for your business",
+    "description": "We help companies create bilingual websites, scalable product pages, and modern digital experiences that look professional and communicate with clarity. Tell us about your goals, timeline, and current challenges, and we will help you shape the right direction.",
+    "stats": [
+      {
+        "value": "EN / RU",
+        "label": "Bilingual website expertise"
+      },
+      {
+        "value": "48h",
+        "label": "Average first response time"
+      },
+      {
+        "value": "Web",
+        "label": "Strategy, design, and implementation"
+      }
+    ],
+    "cta": "Book a discovery call",
+    "ctaHref": "/contact",
+    "image": "/img/contact.svg"
+  },
+  "teaser": {
+    "eyebrow": "Start the conversation",
+    "title": "A focused team for ambitious digital projects",
+    "text": "Northlane Studio works with founders, agencies, and growing companies that need a stronger online presence. Whether you are planning a new bilingual website or improving an existing product experience, we bring structure, presentation, and product thinking to every stage of the project."
+  },
+  "showcase": {
+    "image": "/img/2devki.png",
+    "title": "Built for modern brands",
+    "text": "From polished landing pages to full bilingual company websites, we design digital systems that make brands easier to understand, easier to trust, and easier to grow."
+  },
+  "form": {
+    "eyebrow": "Project enquiry",
+    "title": "Tell us about your project",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "message": "Project details",
+    "submit": "Send message",
+    "policy": "By submitting this form, you agree that we may use your details to contact you about your enquiry and project request."
+  }
+}

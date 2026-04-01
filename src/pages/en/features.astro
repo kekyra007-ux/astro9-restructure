@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import SectionIntro from '../../components/SectionIntro.astro';
+import HighlightCards from '../../components/HighlightCards.astro';
+import TermsList from '../../components/TermsList.astro';
+import Footer from '../../components/Footer.astro';
+import footerCommon from '../../locales/common/en.json';
+import SeoOGPage from '../../components/seo/SeoOGPage.astro';
+import SeoSchemaPage from '../../components/seo/SeoSchemaPage.astro';
+
+const lang = 'en';
+const slug = 'features';
+const locale = (await import('../../locales/pages/features/en.json')).default;
+const { meta, hero, bonusIntro, bonusColorCards, bonusTerms } = locale;
+
+const ref = import.meta.env.PUBLIC_REF ?? '#';
+---
+
+<BaseLayout title={meta.title} description={meta.description} slug={slug}>
+  <Fragment slot="head">
+    <SeoOGPage lang={lang} slug={slug} title={meta.title} description={meta.description} />
+    <SeoSchemaPage lang={lang} slug={slug} title={meta.title} description={meta.description} />
+  </Fragment>
+  <Header currentPage={slug} lang={lang} slug={slug} />
+  <HeroSection
+    lang={lang}
+    title={hero.title}
+    description={hero.description}
+    tags={hero.tags}
+    ctaText={hero.cta}
+    ctaHref={ref}
+    topButtons={hero.topButtons}
+    bgSrc={hero.img}
+  />
+  <SectionIntro
+    heading={bonusIntro.heading}
+    description={bonusIntro.description}
+    depositCard={bonusIntro.depositCard}
+    ctaHref={ref}
+  />
+  <HighlightCards
+    cards={bonusColorCards}
+    ctaHref={ref}
+  />
+
+  <TermsList
+    heading={bonusTerms.heading}
+    items={bonusTerms.items}
+  />
+  <Footer data={footerCommon.footerData} />
+</BaseLayout>

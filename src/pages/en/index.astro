@@ -1,0 +1,39 @@
+---
+/**
+ * English home page — /en/
+ */
+import Layout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import HeroLicense from '../../components/HeroLicense.astro';
+import HomeWelcome from '../../components/HomeWelcome.astro';
+import TrustRoutine from '../../components/TrustRoutine.astro';
+import FAQ from '../../components/FAQ.astro';
+import Footer from '../../components/Footer.astro';
+import SeoOGHome from '../../components/seo/SeoOGHome.astro';
+import SeoSchemaHome from '../../components/seo/SeoSchemaHome.astro';
+import t from '../../locales/pages/home/en.json';
+import footerCommon from '../../locales/common/en.json';
+
+const ref = import.meta.env.PUBLIC_REF ?? '#';
+const app = import.meta.env.PUBLIC_APP ?? ref;
+---
+
+<Layout title={t.meta.title} description={t.meta.description} slug="home" lang="en">
+  <Fragment slot="head">
+    <SeoOGHome lang="en" />
+    <SeoSchemaHome lang="en" />
+  </Fragment>
+  <Header currentPage="home" lang="en" slug="" />
+  <HeroLicense lang="en" />
+  <HomeWelcome
+    heading={t.homeWelcome.heading}
+    description={t.homeWelcome.description}
+    bullets={t.homeWelcome.bullets}
+    trustCard={t.homeWelcome.trustCard}
+    ctaHref={ref}
+  />
+
+  <TrustRoutine data={t.trustRoutine} />
+  <FAQ heading={t.homeFaq.heading} items={t.homeFaq.items} />
+  <Footer data={footerCommon.footerData} />
+</Layout>

@@ -1,0 +1,164 @@
+---
+/**
+ * SectionItemGrid.astro
+ *
+ * Centered heading + large body text + optional 2-column left-border card grid.
+ * Optional section-level CTA buttons (shown after grid or after body if no grid).
+ *
+ * Usage examples:
+ *   — heading + body + CTAs only (no items):   login intro section
+ *   — heading + body + grid (no CTAs):          "Recover Your Password", "Live Casino"
+ *   — heading + body + grid + CTAs:             possible
+ *
+ * Props:
+ *   heading    string
+ *   body       string          — large intro paragraph
+ *   items      GridItem[]      — optional; if empty, no grid is rendered
+ *   cta1       CtaLink         — optional primary button
+ *   cta2       CtaLink         — optional secondary button
+ *   bgDark     boolean         — slightly lighter bg variant
+ *   textAlign  'left'|'justify'— body text alignment (default 'justify')
+ */
+
+interface CtaLink  { text: string; href: string; }
+interface GridItem { title: string; description: string; }
+
+interface Props {
+  heading:   string;
+  body?:     string;
+  items?:    GridItem[];
+  cta1?:     CtaLink;
+  cta2?:     CtaLink;
+  bgDark?:   boolean;
+  textAlign?: 'left' | 'justify';
+}
+
+const {
+  heading,
+  body,
+  items = [],
+  cta1,
+  cta2,
+  bgDark = false,
+  textAlign = 'justify',
+} = Astro.props;
+---
+
+<section class:list={['sec-ig', { 'sec-ig--dark': bgDark }]}>
+  <div class="container">
+    <h2 class="sec-ig__title">{heading}</h2>
+
+    {body && (
+      <p
+        class="sec-ig__body"
+        style={textAlign === 'left' ? 'text-align:left' : undefined}
+      >
+        {body}
+      </p>
+    )}
+
+    {items.length > 0 && (
+      <ul class="sec-ig__grid" role="list">
+        {items.map(item => (
+          <li class="ig-card">
+            <strong class="ig-card__title">{item.title}</strong>
+            <p class="ig-card__desc">{item.description}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {(cta1 || cta2) && (
+      <div class="sec-ig__cta">
+        {cta1 && (
+          <a class="btn btn--primary" href={cta1.href} rel="noopener noreferrer">
+            {cta1.text}
+          </a>
+        )}
+        {cta2 && (
+          <a class="btn btn--outline" href={cta2.href} rel="noopener noreferrer">
+            {cta2.text}
+          </a>
+        )}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+.sec-ig {
+  padding: 60px 0;
+  background-color: var(--main-bg);
+}
+.sec-ig--dark {
+  background-color: var(--page-bg);
+}
+
+.sec-ig__title {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+.sec-ig__body {
+  font-size: 20px;
+  line-height: 1.8;
+  color: rgba(255,255,255,.85);
+  text-align: justify;
+  margin: 0 0 36px;
+}
+
+/* 2-col left-border card grid */
+.sec-ig__grid {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.ig-card {
+  background: rgba(255,255,255,.06);
+  border-left: 4px solid var(--accent, #3a7d44);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 20px 20px 18px;
+}
+
+.ig-card__title {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+
+.ig-card__desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,.75);
+  margin: 0;
+  text-align: justify;
+}
+
+/* CTA row */
+.sec-ig__cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .sec-ig { padding: 40px 0; }
+  .sec-ig__title { font-size: 22px; }
+  .sec-ig__body  { font-size: 17px; text-align: left; }
+  .sec-ig__grid  { grid-template-columns: 1fr; }
+  .ig-card__desc { text-align: left; }
+}
+</style>

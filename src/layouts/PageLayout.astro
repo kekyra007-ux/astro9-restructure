@@ -1,0 +1,199 @@
+---
+/**
+ * src/layouts/PageLayout.astro
+ * Full-page layout: BaseLayout + Header + Footer + global CSS.
+ */
+import BaseLayout from "./BaseLayout.astro";
+import Header     from "../components/Header.astro";
+import Footer     from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  slug?: string;
+  ogImage?: string;
+  /** Hide header (e.g. for 404) */
+  bareHeader?: boolean;
+}
+
+const { title, description, slug, ogImage, bareHeader = false } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} slug={slug} ogImage={ogImage}>
+  <slot name="head" slot="head" />
+
+  <Header bare={bareHeader} />
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style is:global>
+  /* ── Design tokens — light SaaS palette (mirrors BaseLayout) ── */
+  :root {
+    --color-bg:           #FFFFFF;
+    --color-surface:      #FFFFFF;
+    --color-surface-alt:  #F8FAFC;
+    --color-border:       #E2E8F0;
+    --color-border-strong:#CBD5E1;
+    --color-primary:      #6366F1;
+    --color-primary-hover:#4F46E5;
+    --color-accent:       #7C3AED;
+    --color-text:         #0F172A;
+    --color-text-secondary:#475569;
+    --color-muted:        #94A3B8;
+    --color-link:         #6366F1;
+    --color-indigo-bg:    #EEF2FF;
+
+    --font-display: 'Inter', 'OpenSans', system-ui, sans-serif;
+    --font-body:    'Inter', 'OpenSans', system-ui, sans-serif;
+
+    --radius-sm:  6px;
+    --radius-md:  8px;
+    --radius-lg:  12px;
+    --radius-xl:  16px;
+
+    --transition: 0.18s ease;
+
+    --shadow-sm:     0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md:     0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+    --shadow-indigo: 0 4px 20px rgba(99,102,241,0.22);
+
+    --container-max:  1280px;
+    --container-pad:  clamp(1rem, 4vw, 1.5rem);
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+
+  p { color: var(--color-text-secondary); }
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+  a:hover { color: var(--color-primary-hover); }
+
+  /* ── Utility ── */
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition);
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: #FFFFFF;
+    box-shadow: var(--shadow-indigo);
+  }
+  .btn-primary:hover {
+    background: var(--color-primary-hover);
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(99,102,241,0.32);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-border-strong);
+  }
+  .btn-outline:hover {
+    background: var(--color-indigo-bg);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: var(--color-surface-alt);
+    color: var(--color-text-secondary);
+    border: 1.5px solid var(--color-border);
+  }
+  .btn-ghost:hover {
+    background: var(--color-border);
+    color: var(--color-text);
+  }
+
+  .section    { padding-block: clamp(3.5rem, 8vw, 6rem); }
+  .section-sm { padding-block: clamp(2rem, 5vw, 3.5rem); }
+
+  .card {
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  }
+  .card:hover {
+    border-color: #C7D2FE;
+    box-shadow: 0 8px 24px rgba(99,102,241,0.1);
+    transform: translateY(-2px);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .badge-gold {
+    background: var(--color-indigo-bg);
+    color: var(--color-primary);
+    border: 1px solid #C7D2FE;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; }
+
+  .text-center   { text-align: center; }
+  .text-muted    { color: var(--color-muted); }
+  .text-primary  { color: var(--color-primary); }
+
+  .heading-xl { font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 800; letter-spacing: -0.02em; }
+  .heading-lg { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: -0.015em; }
+  .heading-md { font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 600; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #F8FAFC; }
+  ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
+  :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+</style>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import ProductOverview from '../../components/ProductOverview.astro';
+import Footer from '../../components/Footer.astro';
+import footerCommon from '../../locales/common/ru.json';
+import SeoOGPage from '../../components/seo/SeoOGPage.astro';
+import SeoSchemaPage from '../../components/seo/SeoSchemaPage.astro';
+
+const lang = 'ru';
+const slug = 'products';
+const locale = (await import('../../locales/pages/products/ru.json')).default;
+const { meta, hero, casinoOverview } = locale;
+
+const ref = import.meta.env.PUBLIC_REF ?? '#';
+---
+
+<BaseLayout title={meta.title} description={meta.description} slug={slug}>
+  <Fragment slot="head">
+    <SeoOGPage lang={lang} slug={slug} title={meta.title} description={meta.description} />
+    <SeoSchemaPage lang={lang} slug={slug} title={meta.title} description={meta.description} />
+  </Fragment>
+  <Header currentPage={slug} lang={lang} slug={slug} />
+  <HeroSection
+    lang={lang}
+    title={hero.title}
+    description={hero.description}
+    tags={hero.tags}
+    ctaText={hero.cta}
+    ctaHref={ref}
+    topButtons={hero.topButtons}
+    bgSrc={hero.img}
+  />
+  <ProductOverview
+    heading={casinoOverview.heading}
+    description={casinoOverview.description}
+    steps={casinoOverview.steps}
+    winCard={casinoOverview.winCard}
+    lossCard={casinoOverview.lossCard}
+  />
+  <Footer data={footerCommon.footerData} />
+</BaseLayout>

@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Northlane Studio Products - Digital Solutions | Bilingual Product Studio",
+    "description": "Explore Northlane Studio products for bilingual company websites, digital platforms, design systems, and scalable web experiences for modern businesses.",
+    "keywords": "northlane studio products, digital product studio, bilingual website solutions, design systems, web platforms"
+  },
+  "hero": {
+    "title": "NORTHLANE STUDIO PRODUCTS — DIGITAL SOLUTIONS FOR MODERN COMPANIES",
+    "description": "Discover the product direction behind Northlane Studio. From bilingual websites and design systems to scalable interfaces and growth-ready platform structures, every solution is designed to help companies present themselves clearly, work more efficiently, and scale with confidence.",
+    "tags": [
+      "digital products",
+      "bilingual websites",
+      "design systems",
+      "scalable platforms"
+    ],
+    "topButtons": [
+      { "icon": "🔗", "label": "Bilingual website systems" },
+      { "icon": "✅", "label": "Structured product delivery" },
+      { "icon": "📱", "label": "Responsive digital experiences" },
+      { "icon": "🎮", "label": "Business-ready product solutions" }
+    ],
+    "cta": "EXPLORE PRODUCTS",
+    "img": "/img/banner-bg.avif"
+  },
+
+  "casinoOverview": {
+    "heading": "NORTHLANE STUDIO PRODUCTS — DIGITAL PRODUCT SYSTEMS FOR BILINGUAL BUSINESSES",
+    "description": "Explore how Northlane Studio products are structured for companies that need a stronger digital presence, clearer service communication, and scalable web foundations. When businesses look for a digital product studio, the goal is usually the same: launch faster, communicate more clearly, and build a platform that supports both present-day credibility and future growth. Northlane Studio products are designed around reusable systems, clean architecture, bilingual content readiness, and professional visual presentation. Whether the focus is a company website, a product showcase, a service platform, or a modular design system, each product is shaped to help teams move from fragmented digital assets to a more coherent and confident online presence.",
+    "steps": [
+      {
+        "num": "1",
+        "text": "Start with the core product need: define whether the business requires a bilingual website, a service platform, a design system, or a modular content structure."
+      },
+      {
+        "num": "2",
+        "text": "Choose the right product direction: a presentation website for credibility, a structured platform for conversion, or a reusable interface system for long-term scalability."
+      },
+      {
+        "num": "3",
+        "text": "Organize product sections with clear hierarchy, consistent components, and a content system that helps users scan and understand the offer quickly."
+      },
+      {
+        "num": "4",
+        "text": "If the business serves multiple audiences, extend the product into a bilingual structure that supports both English and Russian without breaking consistency."
+      },
+      {
+        "num": "5",
+        "text": "Keep product growth controlled: define priorities, avoid unnecessary complexity, and focus on a system that remains useful as the business evolves."
+      },
+      {
+        "num": "6",
+        "text": "Review the final experience as a repeatable product asset: one that is easy to present, easy to maintain, and ready for future expansion."
+      }
+    ],
+    "winCard": {
+      "title": "Example Success — A Clear Northlane Studio Product Rollout",
+      "points": [
+        "A company starts with a scattered digital presence and no clear product structure across its website and service pages.",
+        "The team selects one focused direction: a bilingual company website supported by reusable sections and a professional content hierarchy.",
+        "Instead of redesigning everything at once, they define a product system with clear priorities, stable page logic, and scalable visual rules.",
+        "As new sections are added, the website stays coherent because each component follows the same structure and design principles.",
+        "The company now presents services, products, and pricing in a consistent way across both English and Russian versions.",
+        "Result: the product feels more credible, the brand looks more mature, and the business has a digital foundation that is easier to grow."
+      ]
+    },
+    "lossCard": {
+      "title": "Example Failure — A Common Product Structure Mistake (and the Fix)",
+      "points": [
+        "A company tries to launch multiple digital products and pages without a clear structure or product hierarchy.",
+        "Different sections are built in isolation, which creates inconsistent messaging, weak navigation, and visual fragmentation.",
+        "The team keeps adding features, layouts, and content blocks without a shared system, so the experience becomes harder to maintain.",
+        "As the website grows, users struggle to understand what the company offers and where to go next.",
+        "The final result looks busy instead of professional—an avoidable product communication mistake.",
+        "Fix: choose one product framework, define reusable components, align content strategy early, and treat the website as a scalable system rather than a collection of disconnected pages."
+      ]
+    }
+  },
+  "disclaimer": "This product content is intended for a professional digital product studio and bilingual company website. Replace demo messaging with your final business offer before launch."
+}

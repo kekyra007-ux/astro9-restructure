@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Page Not Found — OKABCPH Philippines",
+    "description": "The page you're looking for doesn't exist or has been moved. Return to OKABCPH official website to continue.",
+    "keywords": "404, page not found, error, okabcph"
+  },
+  "error": {
+    "code": "404",
+    "title": "Page Not Found",
+    "subtitle": "The page you're looking for doesn't exist or has been moved."
+  },
+  "actions": {
+    "home": {
+      "label": "Go Home",
+      "href": "/en/"
+    },
+    "play": {
+      "label": "Play Now"
+    }
+  },
+  "quickLinks": {
+    "label": "Quick links:",
+    "items": [
+      { "label": "Home",     "href": "/en/" },
+      { "label": "Access",   "href": "/en/link" },
+      { "label": "Register", "href": "/en/register" },
+      { "label": "Bonuses",  "href": "/en/bonuses" }
+    ]
+  }
+}

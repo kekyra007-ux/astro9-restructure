@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "title": "Northlane Studio Features - Product Capabilities | Bilingual Company Website",
+    "description": "Explore the core features of Northlane Studio: bilingual website architecture, scalable content systems, design consistency, and modern product presentation for growing companies.",
+    "keywords": "northlane studio features, bilingual website, digital product studio, scalable design system, company website features"
+  },
+  "hero": {
+    "title": "NORTHLANE STUDIO CORE FEATURES",
+    "description": "Discover the key capabilities behind Northlane Studio. From bilingual website structure and clean content systems to scalable design patterns and professional service presentation, each feature is designed to help companies communicate more clearly and grow with confidence.",
+    "tags": [
+      "northlane studio features",
+      "bilingual structure",
+      "design systems",
+      "scalable delivery"
+    ],
+    "topButtons": [
+      { "icon": "🔗", "label": "Bilingual website foundation" },
+      { "icon": "✅", "label": "Structured feature system" },
+      { "icon": "📱", "label": "Responsive user experience" },
+      { "icon": "🎮", "label": "Business-ready presentation" }
+    ],
+    "cta": "EXPLORE CORE FEATURES",
+    "img": "/img/banner-bg.avif"
+  },
+  "bonusIntro": {
+    "heading": "NORTHLANE STUDIO FEATURES - BILINGUAL WEBSITE SYSTEMS & SCALABLE PRODUCT STRUCTURE",
+    "description": "Northlane Studio features are built for companies that need clarity, stronger presentation, and a digital foundation that can scale over time. Instead of relying on fragmented pages or inconsistent layouts, the system focuses on reusable content blocks, bilingual support, and a cleaner way to present services, products, and business value. The goal is simple: give modern companies a professional website structure that feels clear on the first visit and remains easy to expand as the brand grows.",
+    "depositCard": {
+      "tag": "NORTHLANE STUDIO FEATURE STACK",
+      "subtitle": "Structured Product Features for Modern Bilingual Companies",
+      "heading": "Practical Capabilities for Clear Digital Growth",
+      "rows": [
+        {
+          "label": "How It Works:",
+          "text": "Each feature is designed as part of a reusable system, helping teams present content, services, and product information with more consistency."
+        },
+        {
+          "label": "Availability:",
+          "text": "Feature sets can be adapted to company websites, service platforms, landing pages, and bilingual business presentations."
+        },
+        {
+          "label": "Scalability:",
+          "text": "The structure supports gradual growth, making it easier to add new pages, sections, and language versions without losing clarity."
+        },
+        {
+          "label": "Activation:",
+          "text": "Teams can apply the feature system through design updates, content restructuring, and front-end implementation aligned with business goals."
+        }
+      ],
+      "cta": "VIEW FEATURE SYSTEM"
+    }
+  },
+  "bonusColorCards": [
+    {
+      "label": "Northlane Studio Content Architecture",
+      "heading": "CONTENT STRUCTURE FOR CLEARER COMMUNICATION",
+      "description": "Northlane Studio content architecture helps businesses organize key messages, service descriptions, and product details in a way that feels readable and strategic. Instead of overwhelming visitors with disconnected blocks, the system creates a cleaner narrative flow that improves understanding and supports stronger positioning from the first screen onward.",
+      "items": [
+        "Clear section hierarchy",
+        "Reusable content blocks",
+        "Better scanning and readability",
+        "Built for service and product pages",
+        "Stronger message consistency"
+      ],
+      "cta": "VIEW CONTENT FEATURES→",
+      "color": "teal"
+    },
+    {
+      "label": "Northlane Studio Bilingual System",
+      "heading": "BILINGUAL FEATURES FOR ENGLISH AND RUSSIAN WEBSITES",
+      "description": "The Northlane Studio bilingual system is designed for companies that need one consistent identity across English and Russian versions. It supports a clearer localization workflow, more stable page relationships, and a unified brand tone across both language paths. This makes the final website easier to manage and more credible for different audiences.",
+      "items": [
+        "English and Russian ready",
+        "Consistent page structure across locales",
+        "Unified brand presentation",
+        "Cleaner localization workflow",
+        "Scalable multilingual foundation"
+      ],
+      "cta": "EXPLORE BILINGUAL FEATURES→",
+      "color": "blue"
+    },
+    {
+      "label": "Northlane Studio Presentation Layer",
+      "heading": "PROFESSIONAL PRESENTATION FOR MODERN DIGITAL BRANDS",
+      "description": "Northlane Studio presentation features help businesses look more mature, more focused, and more trustworthy online. The system supports clean layout rhythm, more disciplined visual hierarchy, and a polished tone that makes services and products easier to understand. It is especially useful for studios, agencies, SaaS teams, and B2B companies that want a stronger first impression.",
+      "items": [
+        "Professional visual hierarchy",
+        "Cleaner service presentation",
+        "Better credibility for business websites",
+        "Consistent tone across key pages",
+        "Stronger first impression for clients"
+      ],
+      "cta": "SEE PRESENTATION FEATURES→",
+      "color": "gold"
+    }
+  ],
+
+  "bonusTerms": {
+    "heading": "Northlane Studio Feature Principles",
+    "items": [
+      "Feature implementation should support clarity before complexity.",
+      "Content structure must remain readable across all major pages.",
+      "Only one consistent design direction should guide the full website system.",
+      "All features should follow reusable rules and scalable patterns.",
+      "Bilingual support should preserve brand consistency across language versions.",
+      "Duplicate page logic and fragmented sections should be avoided.",
+      "Feature priorities should be clear before implementation begins.",
+      "Northlane Studio may refine feature sets based on project scope and business goals."
+    ]
+  },
+  "disclaimer": "This feature content is intended for a professional digital product studio and bilingual company website. Replace demo messaging with your final business positioning before launch."
+}

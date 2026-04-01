@@ -1,0 +1,354 @@
+---
+interface Step {
+  num: string;
+  text: string;
+}
+
+interface CompareCard {
+  title: string;
+  points: string[];
+}
+
+interface Props {
+  heading: string;
+  description: string;
+  steps: Step[];
+  winCard: CompareCard;
+  lossCard: CompareCard;
+}
+
+const { heading, description, steps, winCard, lossCard } = Astro.props;
+---
+
+<section class="casino-overview">
+  <div class="casino-overview__inner">
+    <div class="casino-overview__intro">
+      <span class="casino-overview__eyebrow">Platform overview</span>
+      <h2 class="casino-overview__heading">{heading}</h2>
+      <p class="casino-overview__desc">{description}</p>
+    </div>
+
+    <div class="casino-overview__steps">
+      {steps.map((step) => (
+        <article class="casino-overview__step">
+          <div class="casino-overview__step-top">
+            <span class="casino-overview__step-num">{step.num}</span>
+          </div>
+          <p class="casino-overview__step-text">{step.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="casino-overview__compare">
+      <article class="casino-overview__card casino-overview__card--win">
+        <div class="casino-overview__card-top">
+          <span class="casino-overview__card-badge">Preferred route</span>
+          <h3 class="casino-overview__card-title">{winCard.title}</h3>
+        </div>
+
+        <div class="casino-overview__card-list">
+          {winCard.points.map((p) => (
+            <div class="casino-overview__card-point">
+              <span class="casino-overview__card-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none">
+                  <path d="M4.5 10.5L8 14L15.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>{p}</span>
+            </div>
+          ))}
+        </div>
+      </article>
+
+      <article class="casino-overview__card casino-overview__card--loss">
+        <div class="casino-overview__card-top">
+          <span class="casino-overview__card-badge casino-overview__card-badge--muted">Things to avoid</span>
+          <h3 class="casino-overview__card-title">{lossCard.title}</h3>
+        </div>
+
+        <div class="casino-overview__card-list">
+          {lossCard.points.map((p) => (
+            <div class="casino-overview__card-point">
+              <span class="casino-overview__card-icon casino-overview__card-icon--muted" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none">
+                  <path d="M6 6L14 14M14 6L6 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span>{p}</span>
+            </div>
+          ))}
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .casino-overview {
+    background: var(--color-bg);
+    padding: 5.5rem 0;
+  }
+
+  .casino-overview__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .casino-overview__intro {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .casino-overview__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    padding: 0.42rem 0.82rem;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    color: #4f46e5;
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .casino-overview__heading {
+  margin: 0 auto 20px;
+    font-size: clamp(1.5rem, 1.2rem + 1.6vw, 2rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  color: #0f172a;
+  text-align: center;
+  text-transform: none;
+  text-wrap: balance;
+  }
+
+  .casino-overview__desc {
+    margin: 0;
+    max-width: 70ch;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+  }
+
+  .casino-overview__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .casino-overview__step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: 100%;
+    padding: 1.5rem 1.35rem;
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,255,0.92) 100%);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow:
+      0 12px 28px rgba(15, 23, 42, 0.05),
+      inset 0 1px 0 rgba(255,255,255,0.82);
+    overflow: hidden;
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition),
+      border-color var(--transition);
+  }
+
+  .casino-overview__step::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6366f1 0%, #818cf8 50%, #a5b4fc 100%);
+  }
+
+  .casino-overview__step:hover {
+    transform: translateY(-3px);
+    border-color: rgba(99, 102, 241, 0.18);
+    box-shadow:
+      0 18px 36px rgba(15, 23, 42, 0.08),
+      inset 0 1px 0 rgba(255,255,255,0.84);
+  }
+
+  .casino-overview__step-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .casino-overview__step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    color: #4f46e5;
+    font-size: 0.78rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .casino-overview__step-text {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  .casino-overview__compare {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .casino-overview__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    padding: 1.6rem;
+    border-radius: 24px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,255,0.92) 100%);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow:
+      0 12px 28px rgba(15, 23, 42, 0.05),
+      inset 0 1px 0 rgba(255,255,255,0.82);
+  }
+
+  .casino-overview__card-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .casino-overview__card-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    padding: 0.42rem 0.82rem;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    color: #4f46e5;
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .casino-overview__card-badge--muted {
+    background: rgba(15, 23, 42, 0.04);
+    border-color: rgba(15, 23, 42, 0.08);
+    color: var(--color-text);
+  }
+
+  .casino-overview__card-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  .casino-overview__card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .casino-overview__card-point {
+    display: grid;
+    grid-template-columns: 1.3rem 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    font-size: 0.93rem;
+    line-height: 1.62;
+    color: var(--color-text-secondary);
+  }
+
+  .casino-overview__card-icon {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-top: 0.08rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(99, 102, 241, 0.08);
+    color: #4f46e5;
+    flex-shrink: 0;
+  }
+
+  .casino-overview__card-icon--muted {
+    background: rgba(15, 23, 42, 0.06);
+    color: var(--color-text);
+  }
+
+  .casino-overview__card-icon svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  @media (max-width: 1024px) {
+    .casino-overview__steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .casino-overview {
+      padding: 4.5rem 0;
+    }
+
+    .casino-overview__inner {
+      gap: 2.2rem;
+    }
+
+    .casino-overview__steps {
+      grid-template-columns: 1fr;
+    }
+
+    .casino-overview__compare {
+      grid-template-columns: 1fr;
+    }
+
+    .casino-overview__card,
+    .casino-overview__step {
+      padding: 1.3rem;
+      border-radius: 20px;
+    }
+
+    .casino-overview__desc,
+    .casino-overview__step-text,
+    .casino-overview__card-point {
+      font-size: 0.92rem;
+    }
+  }
+</style>

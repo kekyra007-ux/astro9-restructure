@@ -1,0 +1,20 @@
+---
+/**
+ * src/components/seo/SeoOGPage.astro
+ * Generic OG meta for any non-home page.
+ * The page loads its own locale and passes title + description here.
+ */
+import SeoOG from './SeoOG.astro';
+
+interface Props {
+  lang:        string;
+  slug:        string;
+  title:       string;
+  description: string;
+}
+
+const { lang, slug, title, description } = Astro.props;
+const url = `${import.meta.env.PUBLIC_DOMAIN}/${lang}/${slug}`;
+---
+
+<SeoOG title={title} description={description} url={url} />

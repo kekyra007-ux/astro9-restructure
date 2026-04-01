@@ -1,0 +1,432 @@
+---
+/**
+ * HeroLicense.astro — premium business hero
+ */
+
+import type { Lang } from '../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const locale = lang === 'en'
+  ? (await import('../locales/pages/home/en.json')).default
+  : (await import('../locales/pages/home/ru.json')).default;
+
+const data = locale.heroLicense;
+---
+
+<section class="hero-license">
+  <div class="hero-license__media"></div>
+  <div class="hero-license__overlay"></div>
+
+  <div class="hero-license__container">
+    <div class="hero-license__content">
+      <div class="hero-license__eyebrow">
+        <span class="hero-license__eyebrow-dot"></span>
+        <span>{data.eyebrow}</span>
+      </div>
+
+      <div class="hero-license__text-block">
+        <h1 class="hero-license__title">
+          <span class="hero-license__title-top">{data.titleTop}</span>
+          <span class="hero-license__title-accent">{data.titleAccent}</span>
+        </h1>
+
+        <p class="hero-license__description">{data.description}</p>
+      </div>
+
+      <div class="hero-license__actions">
+        <a href="#" class="hero-license__cta hero-license__cta--primary">
+          {data.primaryCta}
+        </a>
+        <a href="#" class="hero-license__cta hero-license__cta--secondary">
+          {data.secondaryCta}
+        </a>
+      </div>
+
+      <div class="hero-license__stats">
+        {data.stats.map((item) => (
+          <div class="hero-license__stat">
+            <div class="hero-license__stat-value">{item.value}</div>
+            <div class="hero-license__stat-label">{item.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="hero-license__bottom">
+        <div class="hero-license__trust-logos">
+          {data.trustLogos.map((item) => (
+            <span class="hero-license__trust-item">{item}</span>
+          ))}
+        </div>
+
+        <div class="hero-license__footnote">{data.footnote}</div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+.hero-license {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 110px 24px 72px;
+  background:
+    linear-gradient(115deg, rgba(7, 10, 18, 0.96) 0%, rgba(10, 14, 26, 0.92) 38%, rgba(15, 23, 42, 0.78) 100%);
+  color: var(--color-two);
+}
+
+.hero-license__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background:
+    linear-gradient(90deg,
+      rgba(5, 8, 15, 0.96) 0%,
+      rgba(5, 8, 15, 0.88) 28%,
+      rgba(5, 8, 15, 0.55) 52%,
+      rgba(5, 8, 15, 0.15) 78%,
+      rgba(5, 8, 15, 0.05) 100%
+    ),
+
+    radial-gradient(circle at 78% 24%, rgba(129, 140, 248, 0.16) 0%, transparent 22%),
+    radial-gradient(circle at 72% 72%, rgba(99, 102, 241, 0.12) 0%, transparent 24%),
+
+    url("/img/hero-business.jpg") center / cover no-repeat;
+}
+.hero-license__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+}
+
+.hero-license__container {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+.hero-license__content {
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-license__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 0 14px;
+  margin-bottom: 26px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255,255,255,0.82);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(10px);
+}
+
+.hero-license__eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  box-shadow: 0 0 0 6px rgba(129, 140, 248, 0.14);
+  flex-shrink: 0;
+}
+
+.hero-license__text-block {
+  margin-bottom: 30px;
+}
+
+.hero-license__title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  max-width: 40ch;
+  font-family: var(--font-display);
+  font-size: clamp(2.9rem, 5vw, 5.8rem);
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+  color: var(--color-two);
+  text-wrap: balance;
+}
+
+.hero-license__title-top {
+  color: rgba(255,255,255,0.96);
+}
+
+.hero-license__title-accent {
+  color: var(--color-three);
+}
+
+.hero-license__description {
+  max-width: 60ch;
+  margin: 22px 0 0;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.76);
+}
+
+.hero-license__actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 34px;
+  flex-wrap: wrap;
+}
+
+.hero-license__cta {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition);
+}
+
+.hero-license__cta--primary {
+  background: var(--color-three);
+  color: #111827;
+}
+
+.hero-license__cta--primary:hover {
+  transform: translateY(-1px);
+  background: var(--color-three);
+  color: #e6ecf9;
+}
+
+.hero-license__cta--secondary {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+}
+
+.hero-license__cta--secondary:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.hero-license__stats {
+  width: 100%;
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 34px;
+}
+
+.hero-license__stat {
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.hero-license__stat-value {
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-two);
+}
+
+.hero-license__stat-label {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.62);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero-license__bottom {
+  width: 100%;
+  max-width: 760px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.hero-license__trust-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-bottom: 18px;
+}
+
+.hero-license__trust-item {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.84);
+}
+
+.hero-license__trust-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.48rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-three);
+  box-shadow: 0 0 0 5px rgba(184, 255, 57, 0.1);
+}
+
+.hero-license__footnote {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .hero-license {
+    padding: 92px 20px 64px;
+  }
+
+  .hero-license__content {
+    max-width: 680px;
+  }
+
+  .hero-license__title {
+    max-width: 12ch;
+    font-size: clamp(2.4rem, 4.2vw, 4.25rem);
+  }
+
+  .hero-license__description {
+    font-size: 0.98rem;
+  }
+
+  .hero-license__stats {
+    gap: 12px;
+  }
+
+  .hero-license__stat {
+    padding: 16px 16px 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-license {
+    padding: 76px 16px 52px;
+  }
+
+  .hero-license__container {
+    padding: 0 16px;
+  }
+
+  .hero-license__content {
+    max-width: 100%;
+  }
+
+  .hero-license__eyebrow {
+    margin-bottom: 22px;
+    font-size: 0.74rem;
+  }
+
+  .hero-license__title {
+    max-width: 100%;
+    font-size: clamp(2.1rem, 8vw, 3.2rem);
+    line-height: 0.96;
+  }
+
+  .hero-license__description {
+    max-width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.68;
+  }
+
+  .hero-license__actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .hero-license__cta {
+    width: 100%;
+  }
+
+  .hero-license__stats {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .hero-license__bottom {
+    max-width: 100%;
+    padding-top: 16px;
+  }
+
+  .hero-license__trust-logos {
+    gap: 10px 14px;
+    margin-bottom: 16px;
+  }
+
+  .hero-license__trust-item {
+    font-size: 0.8rem;
+  }
+
+  .hero-license__footnote {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-license {
+    padding: 68px 14px 44px;
+  }
+
+  .hero-license__container {
+    padding: 0 14px;
+  }
+
+  .hero-license__eyebrow {
+    min-height: 34px;
+    padding: 0 12px;
+  }
+
+  .hero-license__description {
+    font-size: 0.92rem;
+  }
+
+  .hero-license__stat-value {
+    font-size: 1.15rem;
+  }
+
+  .hero-license__stat-label {
+    font-size: 0.74rem;
+  }
+}
+</style>

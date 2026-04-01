@@ -1,0 +1,58 @@
+---
+/**
+ * src/components/SectionHeader.astro
+ * Centered section heading with optional badge and subtitle.
+ */
+
+interface Props {
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  align?: "center" | "left";
+}
+
+const { badge, title, subtitle, align = "center" } = Astro.props;
+---
+
+<div class={`section-header section-header--${align}`}>
+  {badge && (
+    <div class="badge badge-gold section-badge">{badge}</div>
+  )}
+  <h2 class="heading-lg section-title" set:html={title} />
+  {subtitle && (
+    <p class="section-subtitle">{subtitle}</p>
+  )}
+</div>
+
+<style>
+  .section-header {
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .section-header--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .section-header--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .section-badge { align-self: inherit; }
+
+  .section-title :global(em) {
+    font-style: normal;
+    color: var(--color-primary);
+  }
+
+  .section-subtitle {
+    color: var(--color-muted);
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+</style>
