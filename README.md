@@ -178,8 +178,3 @@ Sitemap: {DOMAIN}/sitemap.xml
     └── utils/                # env, canon, i18n
 ```
 
----
-
-## Лицензия
-
-MIT
