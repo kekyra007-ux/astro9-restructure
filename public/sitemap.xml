@@ -5,79 +5,79 @@
 >
   <url>
     <loc>https://okabcph.com/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://okabcph.com/en/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://okabcph.com/tl/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/en/link/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://okabcph.com/en/about/</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/tl/link/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://okabcph.com/tl/about/</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/en/slots/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://okabcph.com/en/features/</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/tl/slots/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://okabcph.com/tl/features/</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/en/bonuses/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://okabcph.com/en/products/</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/tl/bonuses/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://okabcph.com/tl/products/</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/en/gaming/</loc>
-    <lastmod>2026-03-26</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://okabcph.com/en/pricing/</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/tl/gaming/</loc>
-    <lastmod>2026-03-26</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://okabcph.com/tl/pricing/</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/en/register/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://okabcph.com/en/contact/</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://okabcph.com/tl/register/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://okabcph.com/tl/contact/</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
