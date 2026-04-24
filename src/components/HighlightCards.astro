@@ -128,16 +128,14 @@ const themes: Record<string, {
   }
 
   .bonus-cards__inner {
-    max-width: var(--container-max);
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 var(--container-pad);
+    padding: 0 2rem;
   }
-
 
   .bonus-cards__grid {
     display: grid;
-  grid-template-columns: repeat(3, 480px);
-    justify-content: center;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.75rem;
     align-items: stretch;
   }
@@ -361,13 +359,13 @@ const themes: Record<string, {
     flex-shrink: 0;
   }
 
-  @media (max-width: 1279px) {
+  @media (max-width: 1024px) {
     .bonus-cards__inner {
-      max-width: 980px;
+      padding: 0 1.5rem;
     }
 
     .bonus-cards__grid {
-      grid-template-columns: repeat(2, minmax(0, 380px));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.5rem;
     }
   }
